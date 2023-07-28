@@ -1,0 +1,3848 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <title>
+</title>
+</head>
+<body>
+    <style>
+        * {
+            margin: 0;
+
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        #parent > div {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            max-width: 100vw;
+            box-sizing:content-box;
+            padding: 3rem 15vw;
+            gap: 0 1rem;
+        }
+        img {
+            width: 100%;
+            box-shadow:  2px 2px 4px rgba(0, 0, 0, 0.273);
+            box-sizing: border-box;
+        }
+
+        #parent div div {
+            grid-column: 1/5;
+            margin-bottom: 1rem;
+            margin-top: 3rem;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 1.3rem;
+        }
+
+        h2 {
+            grid-column: 1/5;
+            font-size: 2.2rem;
+            margin-bottom: 0;
+            margin-top: 4rem;
+        }
+        h2 + div {
+            margin-top: 0!important;
+        }
+
+        h1 {
+            font-size: 3.2rem;
+            grid-column: 1/5;
+        }
+        .Verbs {
+            background-color: rgb(241, 255, 245);
+        }
+        .Nouns {
+            background-color: rgb(255, 243, 243);
+        }
+        .Sentences {
+            background-color: rgb(255, 255, 240);
+        }
+        .selected {
+            border: #0c0 6px solid;
+        }
+        #headingSelector {
+            position: fixed;
+            left: 25%;
+            top: 1rem;
+            right: 25%;
+            width: 50%;
+            font-size: 1rem;
+        }
+        #selectpanel {
+            position: fixed;
+            width: 100vw;
+            background-color: rgb(60, 60, 60);
+            height: 3.5rem;
+        }
+    </style>
+    <DIV id="selectpanel"><select id="headingSelector"><option disabled="disabled">Nouns</option><option value="0-0">Nouns - pants</option><option value="0-1">Nouns - meeting</option><option value="0-2">Nouns - schnitzel</option><option value="0-3">Nouns - bell</option><option value="0-4">Nouns - restaurant</option><option value="0-5">Nouns - juice</option><option value="0-6">Nouns - earwig</option><option value="0-7">Nouns - house</option><option value="0-8">Nouns - chicken</option><option value="0-9">Nouns - sugarcane</option><option value="0-10">Nouns - hospital</option><option value="0-11">Nouns - ambulance</option><option value="0-12">Nouns - croquet</option><option value="0-13">Nouns - squiggle</option><option value="0-14">Nouns - cucumber</option><option value="0-15">Nouns - flowers</option><option value="0-16">Nouns - bag</option><option value="0-17">Nouns - trumpet</option><option value="0-18">Nouns - camera</option><option value="0-19">Nouns - soil</option><option value="0-20">Nouns - hairspray</option><option value="0-21">Nouns - dinghy</option><option value="0-22">Nouns - molecule</option><option value="0-23">Nouns - plant</option><option value="0-24">Nouns - letter</option><option value="0-25">Nouns - surgery</option><option value="0-26">Nouns - present</option><option value="0-27">Nouns - chips</option><option value="0-28">Nouns - saxophone</option><option value="0-29">Nouns - lattice</option><option value="0-30">Nouns - tuft</option><option value="0-31">Nouns - brim</option><option value="0-32">Nouns - jacket</option><option value="0-33">Nouns - spacesuit</option><option value="0-34">Nouns - wallet</option><option value="0-35">Nouns - pipe</option><option value="0-36">Nouns - armrests</option><option value="0-37">Nouns - origami</option><option value="0-38">Nouns - clipboard</option><option value="0-39">Nouns - bike</option><option value="0-40" >Nouns - microscope</option><option value="0-41">Nouns - rope</option><option value="0-42">Nouns - candle</option><option value="0-43">Nouns - waterfall</option><option value="0-44">Nouns - king</option><option value="0-45">Nouns - hat</option><option value="0-46">Nouns - crown</option><option value="0-47">Nouns - kite</option><option value="0-48">Nouns - pen</option><option value="0-49">Nouns - scissors</option><option value="0-50">Nouns - bone</option><option value="0-51">Nouns - fireman</option><option value="0-52">Nouns - glass</option><option value="0-53">Nouns - boot</option><option value="0-54">Nouns - dice</option><option value="0-55">Nouns - piano</option><option value="0-56">Nouns - closet</option><option value="0-57">Nouns - duck</option><option value="0-58">Nouns - garage</option><option value="0-59">Nouns - house</option><option value="0-60">Nouns - skull</option><option value="0-61">Nouns - cow</option><option value="0-62">Nouns - pear</option><option value="0-63">Nouns - cane</option><option value="0-64">Nouns - cat</option><option value="0-65">Nouns - fork</option><option value="0-66">Nouns - van</option><option value="0-67">Nouns - apple</option><option value="0-68">Nouns - dinosaur</option><option value="0-69">Nouns - hair</option><option value="0-70">Nouns - wig</option><option value="0-71">Nouns - lamp</option><option value="0-72">Nouns - binoculars</option><option value="0-73">Nouns - hand</option><option value="0-74">Nouns - knife</option><option value="0-75">Nouns - football</option><option value="0-76">Nouns - zipper</option><option value="0-77">Nouns - tractor</option><option value="0-78">Nouns - foot</option><option value="0-79">Nouns - tent</option><option disabled="disabled">Verbs</option><option value="1-0">Verbs - lock</option><option value="1-1">Verbs - is giving</option><option value="1-2">Verbs - sank</option><option value="1-3">Verbs - work</option><option value="1-4">Verbs - change [an appointment]</option><option value="1-5">Verbs - beg</option><option value="1-6">Verbs - rise</option><option value="1-7">Verbs - spend</option><option value="1-8">Verbs - eat</option><option value="1-9">Verbs - hibernate</option><option value="1-10">Verbs - dig</option><option value="1-11">Verbs - indicate</option><option value="1-12">Verbs - play records</option><option value="1-13">Verbs - ring</option><option value="1-14">Verbs - resign</option><option value="1-15">Verbs - go</option><option value="1-16">Verbs - massaging</option><option value="1-17">Verbs - steer</option><option value="1-18">Verbs - jump</option><option value="1-19">Verbs - catch it</option><option value="1-20">Verbs - carrying</option><option value="1-21">Verbs - get out</option><option value="1-22">Verbs - draw</option><option value="1-23">Verbs - slurp</option><option value="1-24">Verbs - push</option><option value="1-25">Verbs - overheat</option><option value="1-26">Verbs - pay it</option><option value="1-27">Verbs - drink</option><option value="1-28">Verbs - turn it down</option><option value="1-29">Verbs - smell</option><option value="1-30">Verbs - knocked out</option><option value="1-31">Verbs - hang up</option><option value="1-32">Verbs - book [a reservation]</option><option value="1-33">Verbs - come</option><option value="1-34">Verbs - drive</option><option value="1-35">Verbs - sit</option><option value="1-36">Verbs - leap</option><option value="1-37">Verbs - apologise</option><option value="1-38">Verbs - pull</option><option value="1-39">Verbs - lift</option><option value="1-40">Verbs - saluting [soldiers do this]</option><option value="1-41">Verbs - conducting (directing)[heisinfrontofanorchestra]</option><option value="1-42">Verbs - bowling [his fingers are in the ball]</option><option value="1-43">Verbs - knitting [using yarn]</option><option value="1-44">Verbs - swimming [you do it in a pool]</option><option value="1-45">Verbs - dripping [that is a faucet]</option><option value="1-46">Verbs - boxing (fighting) [a sport using gloves]</option><option value="1-47">Verbs - curtysing (courtesying) [girls do this]</option><option value="1-48">Verbs - smoking [you do it with a cigarette]</option><option value="1-49">Verbs - proposing [having to do with marriage]</option><option value="1-50">Verbs - throwing (pitching) [baseball players do this]</option><option value="1-51">Verbs - shaking (greeting) [you do this when you meet someone]</option><option value="1-52">Verbs - running (jogging) [a way of exercising]</option><option value="1-53">Verbs - milking [doing something to a cow]</option><option value="1-54">Verbs - bowing [performers do this]</option><option value="1-55">Verbs - exercising [he is in a gym]</option><option value="1-56">Verbs - skiing [a sport done on snow]</option><option value="1-57">Verbs - surfing (surfboarding) [he is on waves]</option><option value="1-58">Verbs - cutting [you do it with scissors]</option><option value="1-59">Verbs - knighting (dubbing) [the queen does this]</option><option value="1-60">Verbs - sleeping [you do it at night]</option><option value="1-61">Verbs - floating [staying on top of the water]</option><option value="1-62">Verbs - reading</option><option value="1-63">Verbs - climbing [going up a mountain]</option><option value="1-64">Verbs - sawing [cutting a log in two]</option><option value="1-65">Verbs - sailing (boating) [the wind is moving that]</option><option value="1-66">Verbs - rowing [using oars to make a boat go]</option><option value="1-67">Verbs - diving [entering the water]</option><option value="1-68">Verbs - lassoing (roping) [cowboys do it]</option><option value="1-69">Verbs - pointing [you do it with your index finger]</option><option value="1-70">Verbs - pouring [filling up a glass]</option><option value="1-71">Verbs - kneeling [some people do this when they pray]</option><option value="1-72">Verbs - typing (typewriting) [secretaries do it]</option><option value="1-73">Verbs - ironing [youdothiswhenyourclothesarewrinkled]</option><option value="1-74">Verbs - sweeping [cleaning up the floor]</option><option value="1-75">Verbs - brushing [fixing hair]</option><option value="1-76">Verbs - crying [showing you are sad]</option><option value="1-77">Verbs - shoveling (digging) [makingaholeintheground]</option><option value="1-78">Verbs - fencing [sport using swords]</option><option value="1-79">Verbs - erupting (spewing) [that is a volcano]</option><option disabled="disabled">Sentences</option><option value="2-0">Sentences - [nurse chasing butcher]</option><option value="2-1">Sentences - [singer photographing soldier]</option><option value="2-2">Sentences - [woman eating apple]</option><option value="2-3">Sentences - [male crying]</option><option value="2-4">Sentences - [man sitting]</option><option value="2-5">Sentences - [blue flower in cup]</option><option value="2-6">Sentences - [woman drinking]</option><option value="2-7">Sentences - [woman eating]</option><option value="2-8">Sentences - [dog sitting on table]</option><option value="2-9">Sentences - [dog sitting beneath table]</option><option value="2-10">Sentences - [dancer chasing policeman]</option><option value="2-11">Sentences - [cup on green flower]</option><option value="2-12">Sentences - [man standing]</option><option value="2-13">Sentences - [shoe on green pencil]</option><option value="2-14">Sentences - [policeman chasing dancer]</option><option value="2-15">Sentences - [man walking]</option><option value="2-16">Sentences - [woman walking]</option><option value="2-17">Sentences - [man eating ice-cream]</option><option value="2-18">Sentences - [female crying]</option><option value="2-19">Sentences - [cat on red carpet]</option><option value="2-20">Sentences - [man eating apple]</option><option value="2-21">Sentences - [paper on pen]</option><option value="2-22">Sentences - [flower in a blue cup]</option><option value="2-23">Sentences - [woman standing]</option><option value="2-24">Sentences - [boy sitting on table]</option><option value="2-25">Sentences - [singer hitting a soldier]</option><option value="2-26">Sentences - [policeman painting dancer]</option><option value="2-27">Sentences - [man painting a picture]</option><option value="2-28">Sentences - [mug on blue flower]</option><option value="2-29">Sentences - [soldier photographing singer]</option><option value="2-30">Sentences - [shoe on apple]</option><option value="2-31">Sentences - [shoe on blue pencil]</option><option value="2-32">Sentences - [penicl on blue shoe]</option><option value="2-33">Sentences - [woman sitting]</option><option value="2-34">Sentences - [dancer painting policeman]</option><option value="2-35">Sentences - [red pencil on shoe]</option><option value="2-36">Sentences - [pen on paper]</option><option value="2-37">Sentences - [woman painting picture]</option><option value="2-38">Sentences - [male laughing]</option><option value="2-39">Sentences - [man painting a wall]</option></select></DIV>
+    <div id="parent">
+        <div class="Nouns">
+    
+            <h1>Nouns</h1>
+            <h2>pants</h2>
+            <div>pair of brown trousers laid flat on a white background, stock photograph</div>
+            
+                <img src="output8_files/image(2126).webp">
+                <img src="output8_files/image(2125).webp">
+                <img src="output8_files/image(2124).webp">
+                <img src="output8_files/image(2123).webp" class="selected">
+            
+            <h2>meeting</h2>
+            <div>a board meeting in progress, stock photography</div>
+            
+                <img src="output8_files/image(2122).webp">
+                <img src="output8_files/image(2121).webp">
+                <img src="output8_files/image(2120).webp">
+                <img src="output8_files/image(2119).webp">
+            
+            
+            <div>wide shot of a board meeting in progress, stock photography</div>
+                <img src="output8_files/image(2118).webp">
+                <img src="output8_files/image(2117).webp" class="selected">
+                <img src="output8_files/image(2116).webp">
+                <img src="output8_files/image(2115).webp">
+            
+            <h2>schnitzel</h2>
+            <div>Chicken schnitzel closeup</div>
+            
+                <img src="output8_files/image(1810).webp" class="selected">
+                <img src="output8_files/image(1809).webp">
+                <img src="output8_files/image(1808).webp">
+                <img src="output8_files/image(1807).webp">
+            
+            <h2>bell</h2>
+            <div>A large bronze bell</div>
+            
+                <img src="output8_files/image(1806).webp" class="selected">
+                <img src="output8_files/image(1805).webp">
+                <img src="output8_files/image(1804).webp">
+                <img src="output8_files/image(1803).webp">
+            
+            <h2>restaurant</h2>
+            <div>wide shot of a restaurant, diners and wait staff visible</div>
+                <img src="output8_files/image(1802).webp" class="selected">
+                <img src="output8_files/image(1801).webp">
+                <img src="output8_files/image(1800).webp">
+                <img src="output8_files/image(1799).webp">
+            
+            <h2>juice</h2>
+            <div>a glass of orange juice, studio lighting</div>
+                <img src="output8_files/image(1798).webp">
+                <img src="output8_files/image(1797).webp" class="selected">
+                <img src="output8_files/image(1796).webp">
+                <img src="output8_files/image(1795).webp">
+            
+            <h2>earwig</h2>
+            <div>earwig, natural lighting</div>
+                <img src="output8_files/image(1794).webp" class="selected">
+                <img src="output8_files/image(1793).webp">
+                <img src="output8_files/image(1792).webp">
+                <img src="output8_files/image(1791).webp">
+            
+            <h2>house</h2>
+            <div>A typical, suburban, two storey house, sunlight</div>
+                <img src="output8_files/image(1790).webp" class="selected">
+                <img src="output8_files/image(1789).webp">
+                <img src="output8_files/image(1788).webp">
+                <img src="output8_files/image(1787).webp">
+            
+            <h2>chicken</h2>
+            <div>Chicken on a white background, studio stock photograph, brightly lit</div>
+                <img src="output8_files/image(1786).webp">
+                <img src="output8_files/image(1785).webp">
+                <img src="output8_files/image(1784).webp">
+                <img src="output8_files/image(1783).webp" class="selected">
+            
+            <h2>sugarcane</h2>
+            <div>sugarcane, stock photograph</div>
+                <img src="output8_files/image(1782).webp" class="selected">
+                <img src="output8_files/image(1781).webp">
+                <img src="output8_files/image(1780).webp">
+                <img src="output8_files/image(1779).webp">
+            
+            <div>sugarcane stem with raw sugar, stock photograph</div>
+                <img src="output8_files/image(1774).webp">
+                <img src="output8_files/image(1773).webp">
+                <img src="output8_files/image(1772).webp">
+                <img src="output8_files/image(1771).webp">
+            
+            <h2>hospital</h2>
+            <div>large city hospital, outdoor photograph, wide shot</div>
+                <img src="output8_files/image(1770).webp">
+                <img src="output8_files/image(1769).webp">
+                <img src="output8_files/image(1768).webp">
+                <img src="output8_files/image(1767).webp" class="selected">
+            
+            <h2>ambulance</h2>
+            <div>ambulance with sirens, outdoor photograph, action shot</div>
+                <img src="output8_files/image(1766).webp" class="selected">
+                <img src="output8_files/image(1765).webp">
+                <img src="output8_files/image(1764).webp">
+                <img src="output8_files/image(1763).webp">
+            
+            <h2>croquet</h2>
+            <div>a croquet game on a green lawn, warm outdoor photograph, calm</div>
+                <img src="output8_files/image(1762).webp">
+                <img src="output8_files/image(1761).webp">
+                <img src="output8_files/image(1760).webp">
+                <img src="output8_files/image(1759).webp">
+            
+            
+            <div>a croquet set, warm outdoor photograph, calm</div>
+                <img src="output8_files/image(1758).webp">
+                <img src="output8_files/image(1757).webp">
+                <img src="output8_files/image(1756).webp">
+                <img src="output8_files/image(1755).webp">
+            
+            
+            <div>a croquet mallet and hoop, warm outdoor photograph, calm</div>
+                <img src="output8_files/image(1754).webp">
+                <img src="output8_files/image(1753).webp">
+                <img src="output8_files/image(1752).webp">
+                <img src="output8_files/image(1751).webp">
+            
+            
+            <div>a croquet mallet and hoop</div>
+                <img src="output8_files/image(1750).webp">
+                <img src="output8_files/image(1749).webp">
+                <img src="output8_files/image(1748).webp">
+                <img src="output8_files/image(1747).webp">
+            
+            
+            <div>croquet, stock photograph</div>
+                <img src="output8_files/image(1746).webp">
+                <img src="output8_files/image(1745).webp">
+                <img src="output8_files/image(1744).webp">
+                <img src="output8_files/image(1743).webp">
+            
+            
+            <div>croquet hoop, stock photograph</div>
+                <img src="output8_files/image(1742).webp">
+                <img src="output8_files/image(1741).webp">
+                <img src="output8_files/image(1740).webp">
+                <img src="output8_files/image(1739).webp">
+            
+            <h2>squiggle</h2>
+            <div> a brightly colored squiggle on paper, digital art</div>
+                <img src="output8_files/image(1738).webp">
+                <img src="output8_files/image(1737).webp">
+                <img src="output8_files/image(1736).webp">
+                <img src="output8_files/image(1735).webp" class="selected">
+            
+                <h2>cucumber</h2>
+            <div>a whole green cucumber and slices, studio lighting</div>
+                <img src="output8_files/image(1734).webp">
+                <img src="output8_files/image(1733).webp">
+                <img src="output8_files/image(1732).webp">
+                <img src="output8_files/image(1731).webp" class="selected">
+            
+                <h2>flowers</h2>
+            <div>closeup of a varied flower bunch, bright colours, studio lighting</div>
+                <img src="output8_files/image(1730).webp">
+                <img src="output8_files/image(1729).webp">
+                <img src="output8_files/image(1728).webp" class="selected">
+                <img src="output8_files/image(1727).webp">
+            
+                <h2>bag</h2>
+            <div>a canvas tote bag on a white background, studio lighting</div>
+                <img src="output8_files/image(1726).webp">
+                <img src="output8_files/image(1725).webp">
+                <img src="output8_files/image(1724).webp">
+                <img src="output8_files/image(1723).webp" class="selected">
+            
+                <h2>trumpet</h2>
+            <div>a brass trumpet being played, studio stock photograph, high detail</div>
+                <img src="output8_files/image(1722).webp">
+                <img src="output8_files/image(1721).webp">
+                <img src="output8_files/image(1720).webp" class="selected">
+                <img src="output8_files/image(1719).webp">
+            
+                <h2>camera</h2>
+            <div>a black SLR camera on a white background, well lit</div>
+                <img src="output8_files/image(1718).webp">
+                <img src="output8_files/image(1717).webp" class="selected">
+                <img src="output8_files/image(1716).webp">
+                <img src="output8_files/image(1715).webp">
+            
+                <h2>soil</h2>
+            <div>closeup of dark, moist soil; shallow depth of field</div>
+                <img src="output8_files/image(1714).webp">
+                <img src="output8_files/image(1713).webp">
+                <img src="output8_files/image(1712).webp">
+                <img src="output8_files/image(1711).webp">
+            
+            
+            <div>closeup of dark, moist soil; shallow depth of field, studio lighting</div>
+                <img src="output8_files/image(1710).webp">
+                <img src="output8_files/image(1709).webp">
+                <img src="output8_files/image(1708).webp">
+                <img src="output8_files/image(1707).webp" class="selected">
+            
+            
+            <div>closeup of dark, moist soil; bright natural lighting</div>
+                <img src="output8_files/image(1706).webp">
+                <img src="output8_files/image(1705).webp">
+                <img src="output8_files/image(1704).webp">
+                <img src="output8_files/image(1703).webp">
+            
+            <h2>hairspray</h2>
+            <div>can of hairspray on light backgdrop, studio lit stock photograph</div>
+                <img src="output8_files/image(1702).webp">
+                <img src="output8_files/image(1701).webp">
+                <img src="output8_files/image(1700).webp" class="selected">
+                <img src="output8_files/image(1699).webp">
+            
+            
+            <div>can of hairspray on light background, studio lit, wide shot, stock photograph</div>
+                <img src="output8_files/image(1698).webp">
+                <img src="output8_files/image(1697).webp">
+                <img src="output8_files/image(1696).webp">
+                <img src="output8_files/image(1695).webp">
+            
+            <h2>dinghy</h2>
+            <div>a white inflatable dinghy</div>
+                <img src="output8_files/image(1694).webp">
+                <img src="output8_files/image(1693).webp">
+                <img src="output8_files/image(1692).webp" class="selected">
+                <img src="output8_files/image(1691).webp">
+            
+            <h2>molecule</h2>
+            <div>3D representation of a molecule</div>
+                <img src="output8_files/image(1686).webp">
+                <img src="output8_files/image(1685).webp">
+                <img src="output8_files/image(1684).webp">
+                <img src="output8_files/image(1683).webp">
+            
+            
+            <div>3D representation of a simple molecule, wide shot</div>
+                <img src="output8_files/image(1682).webp">
+                <img src="output8_files/image(1681).webp">
+                <img src="output8_files/image(1680).webp">
+                <img src="output8_files/image(1679).webp" class="selected">
+            
+            <h2>plant</h2>
+            <div>photograph of a potted plant, brightly lit</div>
+                <img src="output8_files/image(1674).webp">
+                <img src="output8_files/image(1673).webp">
+                <img src="output8_files/image(1672).webp">
+                <img src="output8_files/image(1671).webp" class="selected">
+            
+            <h2>letter</h2>
+            <div>Scan of an old handwritten letter, slightly yellowed paper</div>
+                <img src="output8_files/image(1670).webp">
+                <img src="output8_files/image(1669).webp">
+                <img src="output8_files/image(1668).webp">
+                <img src="output8_files/image(1667).webp">
+            
+            
+            <div>Full-page scan of an old handwritten letter, slightly yellowed paper</div>
+                <img src="output8_files/image(1666).webp">
+                <img src="output8_files/image(1665).webp">
+                <img src="output8_files/image(1664).webp">
+                <img src="output8_files/image(1663).webp" class="selected">
+            
+            <h2>surgery</h2>
+            <div>Surgeons in blue scrubs perform an operation, stock photograph</div>
+            
+                <img src="output8_files/image(1570).webp">
+                <img src="output8_files/image(1569).webp">
+                <img src="output8_files/image(1568).webp">
+                <img src="output8_files/image(1567).webp">
+            
+            
+            <div>Surgeons in blue scrubs perform a surgery, stock photograph</div>
+                <img src="output8_files/image(1566).webp" class="selected">
+                <img src="output8_files/image(1565).webp">
+                <img src="output8_files/image(1564).webp">
+                <img src="output8_files/image(1563).webp">
+            
+            <h2>present</h2>
+            <div>A beautifully gift-wrapped present, studio light</div>
+                <img src="output8_files/image(1562).webp">
+                <img src="output8_files/image(1561).webp" class="selected">
+                <img src="output8_files/image(1560).webp">
+                <img src="output8_files/image(1559).webp">
+            
+            <h2>chips</h2>
+            <div>Closeup of potato chips</div>
+                <img src="output8_files/image(1558).webp" class="selected">
+                <img src="output8_files/image(1557).webp">
+                <img src="output8_files/image(1556).webp">
+                <img src="output8_files/image(1555).webp">
+            
+            <h2>saxophone</h2>
+            <div>Mid shot of a saxophone, high detail, studio lighting</div>
+                <img src="output8_files/image(1554).webp">
+                <img src="output8_files/image(1553).webp">
+                <img src="output8_files/image(1552).webp">
+                <img src="output8_files/image(1551).webp">
+            
+            
+            <div>Full photograph of a saxophone, high detail, studio lighting</div>
+                <img src="output8_files/image(1550).webp">
+                <img src="output8_files/image(1549).webp">
+                <img src="output8_files/image(1548).webp">
+                <img src="output8_files/image(1547).webp">
+            
+            
+            <div>Musician playing a saxophone, high detail, studio lighting</div>
+                <img src="output8_files/image(1546).webp">
+                <img src="output8_files/image(1545).webp">
+                <img src="output8_files/image(1544).webp">
+                <img src="output8_files/image(1543).webp" class="selected">
+            
+            <h2>lattice</h2>
+            <div>closeup of a wooden lattice, garden visible in background, shallow depth of field</div>
+                <img src="output8_files/image(1542).webp">
+                <img src="output8_files/image(1541).webp">
+                <img src="output8_files/image(1540).webp">
+                <img src="output8_files/image(1539).webp">
+            
+            
+            <div>wooden diamond-shaped lattice, blurred garden background</div>
+                <img src="output8_files/image(1538).webp">
+                <img src="output8_files/image(1537).webp">
+                <img src="output8_files/image(1536).webp">
+                <img src="output8_files/image(1535).webp">
+            
+            
+            <div>wooden diamond-shaped lattice, outdoor light</div>
+            
+                <img src="output8_files/image(1530).webp">
+                <img src="output8_files/image(1529).webp">
+                <img src="output8_files/image(1528).webp">
+                <img src="output8_files/image(1527).webp" class="selected">
+            
+            <h2>tuft</h2>
+            <div>solitary tuft of grass grows in a rocky landscape, closeup</div>
+            
+                <img src="output8_files/image(1522).webp">
+                <img src="output8_files/image(1521).webp">
+                <img src="output8_files/image(1520).webp">
+                <img src="output8_files/image(1519).webp" class="selected">
+            
+            <h2>brim</h2>
+            <div>closeup of a hat brim</div>
+                <img src="output8_files/image(1518).webp">
+                <img src="output8_files/image(1517).webp">
+                <img src="output8_files/image(1516).webp">
+                <img src="output8_files/image(1515).webp">
+            
+            
+            <div>closeup of a hat brim, centred on the brim edge</div>
+                <img src="output8_files/image(1514).webp" class="selected">
+                <img src="output8_files/image(1513).webp">
+                <img src="output8_files/image(1512).webp">
+                <img src="output8_files/image(1511).webp">
+            
+            <h2>jacket</h2>
+            <div>a jacket laid out on a white background, studio lighting</div>
+                <img src="output8_files/image(1510).webp">
+                <img src="output8_files/image(1509).webp">
+                <img src="output8_files/image(1508).webp" class="selected">
+                <img src="output8_files/image(1507).webp">
+            
+            <h2>spacesuit</h2>
+            <div>an astronaut spacesuit in a museum, tourist's photograph</div>
+                <img src="output8_files/image(1506).webp" class="selected">
+                <img src="output8_files/image(1505).webp">
+                <img src="output8_files/image(1504).webp">
+                <img src="output8_files/image(1503).webp">
+            
+            <h2>wallet</h2>
+            <div>closeup of a fine leather wallet on a benchtop</div>
+                <img src="output8_files/image(1502).webp">
+                <img src="output8_files/image(1501).webp">
+                <img src="output8_files/image(1500).webp" class="selected">
+                <img src="output8_files/image(1499).webp">
+            
+            <h2>pipe</h2>
+            <div>a large, grey metal pipe runs through the desert</div>
+                <img src="output8_files/image(1498).webp">
+                <img src="output8_files/image(1497).webp">
+                <img src="output8_files/image(1496).webp">
+                <img src="output8_files/image(1495).webp">
+            
+            
+            <div>a large, grey metal pipe with bolted joins runs through the desert</div>
+                <img src="output8_files/image(1494).webp">
+                <img src="output8_files/image(1493).webp">
+                <img src="output8_files/image(1492).webp">
+                <img src="output8_files/image(1491).webp">
+            
+            
+            <div>a straight, metal pipe with bolted joins runs through the desert</div>
+                <img src="output8_files/image(1490).webp">
+                <img src="output8_files/image(1489).webp">
+                <img src="output8_files/image(1488).webp" class="selected">
+                <img src="output8_files/image(1487).webp">
+            
+            <h2>armrests</h2>
+            <div>closeup of an armrest on a comfy armchair</div>
+                <img src="output8_files/image(1486).webp">
+                <img src="output8_files/image(1485).webp" class="selected">
+                <img src="output8_files/image(1484).webp">
+                <img src="output8_files/image(1483).webp">
+            
+            <h2>origami</h2>
+            <div>several examples of origami</div>
+                <img src="output8_files/image(1482).webp">
+                <img src="output8_files/image(1481).webp">
+                <img src="output8_files/image(1480).webp" class="selected">
+                <img src="output8_files/image(1479).webp">
+            
+            <h2>clipboard</h2>
+            <div>an A4 clipboard, stock photograph</div>
+                <img src="output8_files/image(1478).webp">
+                <img src="output8_files/image(1477).webp">
+                <img src="output8_files/image(1476).webp" class="selected">
+                <img src="output8_files/image(1475).webp">
+            
+            <h2>bike</h2>
+            <div>road bicycle, studio lighting</div>
+                <img src="output8_files/image(1474).webp" class="selected">
+                <img src="output8_files/image(1473).webp">
+                <img src="output8_files/image(1472).webp">
+                <img src="output8_files/image(1471).webp">
+
+            <h2>microscope</h2>
+            <div>stock photograph of a microscope, studio lighting</div>
+            <img src="output8_files/image_441.webp" class="selected">
+            <img src="output8_files/image_278.webp">
+            <img src="output8_files/image_1320.webp">
+            <img src="output8_files/image_266.webp">
+            
+            <h2>rope</h2>
+            <div>woven rope on a white background, studio lighting</div>
+            <img src="output8_files/image_1567.webp">
+            <img src="output8_files/image_1014.webp" class="selected">
+            <img src="output8_files/image_1452.webp">
+            <img src="output8_files/image_1088.webp">
+            
+            <h2>candle</h2>
+            <div>a white candle burning, black background</div>
+            <img src="output8_files/image_400.webp" class="selected">
+            <img src="output8_files/image_830.webp">
+            <img src="output8_files/image_015.webp">
+            <img src="output8_files/image_855.webp">
+            
+            <h2>waterfall</h2>
+            <div>A large waterfall spills over rocks into a river, daylight, national geographic</div>
+            <img src="output8_files/image_077.webp">
+            <img src="output8_files/image_1623.webp" class="selected">
+            <img src="output8_files/image_604.webp">
+            <img src="output8_files/image_1509.webp">
+            
+            <h2>king</h2>
+            <div>Portrait of a regal king wearing a crown</div>
+            <img src="output8_files/image_045.webp">
+            <img src="output8_files/image_793.webp">
+            <img src="output8_files/image_1481.webp">
+            <img src="output8_files/image_079.webp">
+            
+            
+            <div>Portrait of a regal king wearing a crown, renaissance painting</div>
+            <img src="output8_files/image_360.webp">
+            <img src="output8_files/image_1178.webp">
+            <img src="output8_files/image_586.webp">
+            <img src="output8_files/image_032.webp">
+            
+            
+            <div>Portrait of a king wearing a golden crown, head and shoulders, renaissance painting</div>
+            <img src="output8_files/image_276.webp">
+            <img src="output8_files/image_1598.webp">
+            <img src="output8_files/image_548.webp">
+            <img src="output8_files/image_027.webp" class="selected">
+            
+            <h2>hat</h2>
+            <div>A black hat on a white background, studio lighting</div>
+            <img src="output8_files/image_722.webp">
+            <img src="output8_files/image_1409.webp" class="selected">
+            <img src="output8_files/image_572.webp">
+            <img src="output8_files/image_1374.webp">
+            
+            <h2>crown</h2>
+            <div>A golden, jewel-encrusted crown on a white background, studio lighting</div>
+            
+            <img src="output8_files/image_1003.webp" class="selected">
+            <img src="output8_files/image_056.webp">
+            <img src="output8_files/image_627.webp">
+            <img src="output8_files/image_522.webp">
+            
+            <h2>kite</h2>
+            <div>A kite flying against a blue sky, outdoor lighting</div>
+            <img src="output8_files/image_100.webp">
+            <img src="output8_files/image_1278.webp">
+            <img src="output8_files/image_685.webp">
+            <img src="output8_files/image_1406.webp" class="selected">
+            
+            <h2>pen</h2>
+            <div>A ballpoint pen lying on a desk, stock photograph</div>
+            <img src="output8_files/image_1400.webp">
+            <img src="output8_files/image_208.webp">
+            <img src="output8_files/image_1203.webp">
+            <img src="output8_files/image_1460.webp">
+            
+            
+            <div>Midshot of a ballpoint pen lying on a desk, stock photograph</div>
+            <img src="output8_files/image_1492.webp">
+            <img src="output8_files/image_034.webp">
+            <img src="output8_files/image_1112.webp">
+            <img src="output8_files/image_451.webp">
+            
+            
+            <div>Overhead view of a ballpoint pen lying on a desk, stock photograph</div>
+            <img src="output8_files/image_281.webp">
+            <img src="output8_files/image_279.webp">
+            <img src="output8_files/image_1373.webp">
+            <img src="output8_files/image_384.webp" class="selected">
+            
+            <h2>scissors</h2>
+            <div>Overhead view of a scissors on a desk, stock photograph</div>
+            <img src="output8_files/image_1607.webp" class="selected">
+            <img src="output8_files/image_577.webp">
+            <img src="output8_files/image_1206.webp">
+            <img src="output8_files/image_909.webp">
+            
+            <h2>bone</h2>
+            <div>Overhead view of a dry bone, stock photograph</div>
+            <img src="output8_files/image_1364.webp">
+            <img src="output8_files/image_1380.webp" class="">
+            <img src="output8_files/image_335.webp">
+            <img src="output8_files/image_269.webp">
+            
+            <h2>fireman</h2>
+            <div>A fireman holding a firehose, news photograph</div>
+            <img src="output8_files/image_1419.webp">
+            <img src="output8_files/image_651.webp">
+            <img src="output8_files/image_969.webp">
+            <img src="output8_files/image_1426.webp">
+            
+            
+            <div>A fireman holding a firehose, studio lighting, stock photograph</div>
+            <img src="output8_files/image_1025.webp">
+            <img src="output8_files/image_979.webp">
+            <img src="output8_files/image_1163.webp">
+            <img src="output8_files/image_1224.webp">
+            
+            
+            <div>A man in fireman's uniform and hat, studio lighting, stock photograph</div>
+            <img src="output8_files/image_428.webp">
+            <img src="output8_files/image_1520.webp">
+            <img src="output8_files/image_1338.webp">
+            <img src="output8_files/image_968.webp">
+            
+            
+            <div>Full shot of a man in fireman's uniform and hat, studio lighting, stock photograph</div>
+            <img src="output8_files/image_784.webp">
+            <img src="output8_files/image_817.webp">
+            <img src="output8_files/image_1543.webp">
+            <img src="output8_files/image_1475.webp">
+            
+            
+            <div>Head and shoulders midshot of a man in fireman's uniform and hat, studio lighting, stock photograph</div>
+            <img src="output8_files/image_364.webp">
+            <img src="output8_files/image_1395.webp" class="selected">
+            <img src="output8_files/image_1366.webp">
+            <img src="output8_files/image_518.webp">
+            
+            <h2>glass</h2>
+            <div>An empty glass on a white background, studio lighting</div>
+            <img src="output8_files/image_764.webp">
+            <img src="output8_files/image_1378.webp">
+            <img src="output8_files/image_424.webp">
+            <img src="output8_files/image_368.webp" class="selected">
+            
+            <h2>boot</h2>
+            <div>An old leather boot, studio lighting</div>
+            <img src="output8_files/image_1147.webp" class="selected">
+            <img src="output8_files/image_667.webp">
+            <img src="output8_files/image_889.webp">
+            <img src="output8_files/image_1120.webp">
+            
+            <h2>dice</h2>
+            <div>Closeup of a standard dice, black background, 4800K</div>
+            <img src="output8_files/image_1208.webp">
+            <img src="output8_files/image_673.webp">
+            <img src="output8_files/image_109.webp" class="selected">
+            <img src="output8_files/image_1321.webp">
+            
+            <h2>piano</h2>
+            <div>Wide shot of a grand piano, dark background</div>
+            <img src="output8_files/image_1503.webp">
+            <img src="output8_files/image_040.webp">
+            <img src="output8_files/image_718.webp">
+            <img src="output8_files/image_1348.webp">
+            
+            
+            <div>Stock photograph of a piano, dark background</div>
+            <img src="output8_files/image_1156.webp">
+            <img src="output8_files/image_946.webp">
+            <img src="output8_files/image_1019.webp">
+            <img src="output8_files/image_974.webp">
+            
+            
+            <div>Wide shot of a piano, studio lighting</div>
+            <img src="output8_files/image_930.webp">
+            <img src="output8_files/image_776.webp">
+            <img src="output8_files/image_514.webp" class="selected">
+            <img src="output8_files/image_1262.webp">
+            
+            <h2>closet</h2>
+            <div>An open closet door, with clothing hung inside it. Interior photograph.</div>
+            <img src="output8_files/image_1333.webp">
+            <img src="output8_files/image_353.webp">
+            <img src="output8_files/image_664.webp">
+            <img src="output8_files/image_992.webp">
+            
+            
+            <div>A single doored closet with clothing hung inside it. Interior photograph.</div>
+            <img src="output8_files/image_1446.webp">
+            <img src="output8_files/image_1478.webp" class="selected">
+            <img src="output8_files/image_1319.webp">
+            <img src="output8_files/image_194.webp">
+            
+            
+            <div>A closet with clothing hung inside it. Interior photograph.</div>
+            <img src="output8_files/image_018.webp">
+            <img src="output8_files/image_1075.webp">
+            <img src="output8_files/image_607.webp">
+            <img src="output8_files/image_1396.webp">
+            
+            <h2>duck</h2>
+            <div>A duck, outdoor photograph, daylight</div>
+            <img src="output8_files/image_153.webp" class="selected">
+            <img src="output8_files/image_504.webp">
+            <img src="output8_files/image_1009.webp">
+            <img src="output8_files/image_1422.webp">
+            
+            <h2>garage</h2>
+            <div>A single car garage, outdoor photograph</div>
+            <img src="output8_files/image_1230.webp" class="selected">
+            <img src="output8_files/image_148.webp">
+            <img src="output8_files/image_482.webp">
+            <img src="output8_files/image_280.webp">
+            
+            <h2>house</h2>
+            <div>Wide shot of a house, outdoor lighting</div>
+            <img src="output8_files/image_1132.webp">
+            <img src="output8_files/image_1629.webp">
+            <img src="output8_files/image_1205.webp" class="selected">
+            <img src="output8_files/image_1451.webp">
+            
+            <h2>skull</h2>
+            <div>A human skull, dark background, studio lighting</div>
+            <img src="output8_files/image_201.webp" class="selected">
+            <img src="output8_files/image_568.webp">
+            <img src="output8_files/image_1137.webp">
+            <img src="output8_files/image_1008.webp">
+            
+            <h2>cow</h2>
+            <div>Photograph of a cow in a field, outdoor lighting</div>
+            <img src="output8_files/image_804.webp">
+            <img src="output8_files/image_1621.webp">
+            <img src="output8_files/image_1585.webp">
+            <img src="output8_files/image_1323.webp">
+            
+            
+            <div>Photograph of a Friesian cow in a field, outdoor lighting</div>
+            <img src="output8_files/image_913.webp">
+            <img src="output8_files/image_261.webp" class="selected">
+            <img src="output8_files/image_530.webp">
+            <img src="output8_files/image_1611.webp">
+            
+            <h2>pear</h2>
+            <div>A ripe pear, stock photograph, warm studio lighting</div>
+            <img src="output8_files/image_203.webp">
+            <img src="output8_files/image_1010.webp">
+            <img src="output8_files/image_825.webp">
+            <img src="output8_files/image_1343.webp" class="selected">
+            
+            <h2>cane</h2>
+            <div>A wooden walking cane, studio lighting</div>
+            <img src="output8_files/image_1375.webp">
+            <img src="output8_files/image_914.webp">
+            <img src="output8_files/image_322.webp">
+            <img src="output8_files/image_474.webp">
+            
+            
+            <div>A curved walking cane, studio lighting</div>
+            <img src="output8_files/image_883.webp">
+            <img src="output8_files/image_1037.webp">
+            <img src="output8_files/image_896.webp" class="selected">
+            <img src="output8_files/image_334.webp">
+            
+            <h2>cat</h2>
+            <div>A cat, photograph</div>
+            <img src="output8_files/image_1603.webp">
+            <img src="output8_files/image_375.webp" class="selected">
+            <img src="output8_files/image_463.webp">
+            <img src="output8_files/image_113.webp">
+            
+            <h2>fork</h2>
+            <div>A metal fork, studio lighting</div>
+            <img src="output8_files/image_680.webp">
+            <img src="output8_files/image_809.webp">
+            <img src="output8_files/image_186.webp" class="selected">
+            <img src="output8_files/image_1369.webp">
+            
+            <h2>van</h2>
+            <div>A white van parked on a street, outdoor lighting</div>
+            <img src="output8_files/image_783.webp">
+            <img src="output8_files/image_282.webp" class="selected">
+            <img src="output8_files/image_1470.webp">
+            <img src="output8_files/image_1593.webp">
+            
+            <h2>apple</h2>
+            <div>A red apple, studio lighting</div>
+            <img src="output8_files/image_1394.webp">
+            <img src="output8_files/image_779.webp">
+            <img src="output8_files/image_1109.webp" class="selected">
+            <img src="output8_files/image_524.webp">
+            
+            <h2>dinosaur</h2>
+            <div>Artist's depiction of a brachiosaurus</div>
+            <img src="output8_files/image_1622.webp">
+            <img src="output8_files/image_687.webp">
+            <img src="output8_files/image_1372.webp">
+            <img src="output8_files/image_730.webp">
+            
+            
+            <div>Artist's depiction of a tyrannosaurus rex</div>
+            <img src="output8_files/image_1628.webp" class="selected">
+            <img src="output8_files/image_025.webp">
+            <img src="output8_files/image_321.webp">
+            <img src="output8_files/image_731.webp">
+            
+            <h2>hair</h2>
+            <div>Closeup of a woman's long hair, high gloss, studio lighting</div>
+            <img src="output8_files/image_277.webp">
+            <img src="output8_files/image_1259.webp">
+            <img src="output8_files/image_297.webp">
+            <img src="output8_files/image_1586.webp" class="selected">
+            
+            <h2>wig</h2>
+            <div>A wig placed on a mannequin head, studio lighting</div>
+            <img src="output8_files/image_492.webp">
+            <img src="output8_files/image_369.webp">
+            <img src="output8_files/image_1113.webp">
+            <img src="output8_files/image_558.webp">
+            
+            
+            <div>A wig placed on a faceless mannequin head, studio lighting</div>
+            <img src="output8_files/image_1011.webp" class="selected">
+            <img src="output8_files/image_155.webp">
+            <img src="output8_files/image_444.webp">
+            <img src="output8_files/image_612.webp">
+            
+            <h2>lamp</h2>
+            <div>A desk lamp, stock photograph</div>
+            <img src="output8_files/image_735.webp">
+            <img src="output8_files/image_774.webp">
+            <img src="output8_files/image_337.webp">
+            <img src="output8_files/image_720.webp" class="selected">
+            
+            <h2>binoculars</h2>
+            <div>Binoculars, stock photograph</div>
+            <img src="output8_files/image_1355.webp">
+            <img src="output8_files/image_1210.webp">
+            <img src="output8_files/image_067.webp" class="selected">
+            <img src="output8_files/image_134.webp">
+            
+            <h2>hand</h2>
+            <div>Closeup of a hand, white studio background</div>
+            <img src="output8_files/image_1505.webp">
+            <img src="output8_files/image_958.webp" class="selected">
+            <img src="output8_files/image_093.webp">
+            <img src="output8_files/image_1160.webp">
+            
+            <h2>knife</h2>
+            <div>A kitchen knife, studio lighting</div>
+            <img src="output8_files/image_1324.webp">
+            <img src="output8_files/image_087.webp">
+            <img src="output8_files/image_795.webp">
+            <img src="output8_files/image_220.webp">
+            
+            
+            <div>Mid shot of a kitchen knife lying on a benchtop</div>
+            <img src="output8_files/image_288.webp">
+            <img src="output8_files/image_133.webp">
+            <img src="output8_files/image_1382.webp" class="selected">
+            <img src="output8_files/image_1164.webp">
+            
+            <h2>football</h2>
+            <div>An NFL football, studio lighting</div>
+            
+            <img src="output8_files/image_1566.webp">
+            <img src="output8_files/image_071.webp">
+            <img src="output8_files/image_1121.webp" class="selected">
+            <img src="output8_files/image_1450.webp">
+            
+            <h2>zipper</h2>
+            <div>Closeup of a zipper</div>
+            
+            <img src="output8_files/image_1557.webp">
+            <img src="output8_files/image_1135.webp">
+            <img src="output8_files/image_1602.webp">
+            <img src="output8_files/image_053.webp">
+            
+            
+            <div>A jacket with a zipper</div>
+            <img src="output8_files/image_301.webp">
+            <img src="output8_files/image_098.webp">
+            <img src="output8_files/image_823.webp">
+            <img src="output8_files/image_671.webp" class="selected">
+            
+            <h2>tractor</h2>
+            <div>Mid shot of a tractor on a farm, midday lighting</div>
+            
+            <img src="output8_files/image_476.webp">
+            <img src="output8_files/image_1024.webp">
+            <img src="output8_files/image_1252.webp">
+            <img src="output8_files/image_187.webp">
+            
+            
+            <div>Wide shot of a tractor on a farm, midday lighting</div>
+            <img src="output8_files/image_532.webp">
+            <img src="output8_files/image_434.webp">
+            <img src="output8_files/image_1471.webp">
+            <img src="output8_files/image_387.webp" class="selected">
+            
+            <h2>foot</h2>
+            <div>A foot standing on a white background, stock photograph</div>
+            <img src="output8_files/image_1423.webp">
+            <img src="output8_files/image_1039.webp">
+            <img src="output8_files/image_1443.webp">
+            <img src="output8_files/image_340.webp">
+            
+            
+            <div>Adult foot standing on a white background, stock photograph</div>
+            <img src="output8_files/image_563.webp">
+            <img src="output8_files/image_1182.webp">
+            <img src="output8_files/image_721.webp" class="selected">
+            <img src="output8_files/image_417.webp">
+            
+            <h2>tent</h2>
+            <div>A tent in a forest clearing, outdoor photograph</div>
+            <img src="output8_files/image_300.webp">
+            <img src="output8_files/image_1582.webp">
+            <img src="output8_files/image_669.webp" class="selected">
+            <img src="output8_files/image_508.webp">
+        </div>
+        <div class="Verbs">
+            <h1>Verbs</h1>
+            <h2>lock</h2>
+            <div>closeup of a hand turning a key in a heavy padlock, low angle, studio light</div>
+            <img src="output8_files/image(2098).webp">
+            <img src="output8_files/image(2097).webp">
+            <img src="output8_files/image(2096).webp">
+            <img src="output8_files/image(2095).webp">
+            
+            <div>closeup of a hand locking a heavy padlock, studio light</div>
+            <img src="output8_files/image(2094).webp">
+            <img src="output8_files/image(2093).webp">
+            <img src="output8_files/image(2092).webp">
+            <img src="output8_files/image(2091).webp">
+            
+            <div>closeup of a hand locking a door, daylight, stock photography</div>
+            <img src="output8_files/image(2090).webp">
+            <img src="output8_files/image(2089).webp">
+            <img src="output8_files/image(2088).webp">
+            <img src="output8_files/image(2087).webp">
+            
+            
+            <div>closeup of a hand turning a key to lock a door, daylight, stock photography</div>
+            <img src="output8_files/image(2086).webp">
+            <img src="output8_files/image(2085).webp">
+            <img src="output8_files/image(2084).webp">
+            <img src="output8_files/image(2083).webp">
+            
+            <div>closeup of a hand turning a key in a door, daylight, stock photography</div>
+            <img src="output8_files/image(2082).webp" class="selected">
+            <img src="output8_files/image(2081).webp">
+            <img src="output8_files/image(2080).webp">
+            <img src="output8_files/image(2079).webp">
+            
+            <h2>is giving</h2>
+            <div>A smiling boy giving a brightly wrapped gift to a girl, Stock photography, studio light</div>
+
+                
+                <img src="output8_files/image(2134).webp">
+                <img src="output8_files/image(2133).webp">
+                <img src="output8_files/image(2132).webp">
+                <img src="output8_files/image(2131).webp" style="" class="selected">
+            
+            <h2>sank</h2>
+            <div>Mid shot of a half sunken boat in a lake, daylight</div>
+            
+                <img src="output8_files/image(2078).webp">
+                <img src="output8_files/image(2077).webp" class="selected">
+                <img src="output8_files/image(2076).webp">
+                <img src="output8_files/image(2075).webp">
+            
+            <h2>work</h2>
+            <div>Mid shot of a man working at an office desk, frowning as he types and reads a document. Stock photography</div>
+                <img src="output8_files/image(2074).webp">
+                <img src="output8_files/image(2073).webp">
+                <img src="output8_files/image(2072).webp" class="selected">
+                <img src="output8_files/image(2071).webp">
+            
+            <h2>change [an appointment]</h2>
+            <div>An adult books an appointment at a reception desk, photograph</div>
+                
+                <img src="output8_files/image(1658).webp">
+                <img src="output8_files/image(1657).webp">
+                <img src="output8_files/image(1656).webp">
+                <img src="output8_files/image(1655).webp">
+            
+            <div>Split screen telephone conversation between a receptionist and woman, stock photography</div>
+                <img src="output8_files/image(1654).webp">
+                <img src="output8_files/image(1653).webp">
+                <img src="output8_files/image(1652).webp">
+                <img src="output8_files/image(1651).webp">
+            
+            <div>A woman speaks to a receptionist on the telephone, stock photography</div>
+                <img src="output8_files/image(1650).webp">
+                <img src="output8_files/image(1649).webp">
+                <img src="output8_files/image(1648).webp">
+                <img src="output8_files/image(1647).webp">
+            
+            <div>A receptionist speaks on the phone while consulting a diary, photograph</div>
+                <img src="output8_files/image(1646).webp" class="selected">
+                <img src="output8_files/image(1645).webp">
+                <img src="output8_files/image(1644).webp">
+                <img src="output8_files/image(1643).webp">
+            
+            <h2>beg</h2>
+            <div>A child begs on the street, daylight, photography</div>
+            
+                <img src="output8_files/image(2070).webp" class="selected">
+                <img src="output8_files/image(2069).webp">
+                <img src="output8_files/image(2068).webp">
+                <img src="output8_files/image(2067).webp">
+            
+            <h2>rise</h2>
+            <div>A row of houses is partially flooded by rising sea levels, news photograph</div>
+            
+                <img src="output8_files/image(1662).webp">
+                <img src="output8_files/image(1661).webp" class="selected">
+                <img src="output8_files/image(1660).webp">
+                <img src="output8_files/image(1659).webp">
+            
+            <h2>spend</h2>
+            <div>Money changing hands at the register, mid shot, stock photography</div>
+            
+            
+                
+                
+                <img src="output8_files/image(2066).webp">
+                <img src="output8_files/image(2065).webp">
+                <img src="output8_files/image(2064).webp">
+                <img src="output8_files/image(2063).webp">
+            
+            <div>Paying cash at the register, mid shot, stock photography</div>
+                <img src="output8_files/image(2062).webp">
+                <img src="output8_files/image(2061).webp">
+                <img src="output8_files/image(2060).webp" class="selected">
+                <img src="output8_files/image(2059).webp">
+            
+            <div>Paying cash at the register of an expensive uptown store, mid shot, stock photography</div>
+                <img src="output8_files/image(2058).webp">
+                <img src="output8_files/image(2057).webp">
+                <img src="output8_files/image(2056).webp">
+                <img src="output8_files/image(2055).webp">
+            
+            <div>Paying cash at the register of an expensive uptown store, stock photography</div>
+                <img src="output8_files/image(2054).webp">
+                <img src="output8_files/image(2053).webp">
+                <img src="output8_files/image(2052).webp">
+                <img src="output8_files/image(2051).webp">
+            
+            <h2>eat</h2>
+            <div>A smiling girl eats spaghetti, white studio background, stock image</div>
+                <img src="output8_files/image(2050).webp">
+                <img src="output8_files/image(2049).webp">
+                <img src="output8_files/image(2048).webp" class="selected">
+                <img src="output8_files/image(2047).webp">
+            
+            <h2>hibernate</h2>
+            <div>A Brown Bear hibernates in a tree hollow, nature photography</div>
+                <img src="output8_files/image(2046).webp">
+                <img src="output8_files/image(2045).webp">
+                <img src="output8_files/image(2044).webp">
+                <img src="output8_files/image(2043).webp" class="selected">
+            
+            <h2>dig</h2>
+            <div>digging a hole with a spade, mid shot, daylight</div>
+                <img src="output8_files/image(2042).webp">
+                <img src="output8_files/image(2041).webp">
+                <img src="output8_files/image(2040).webp">
+                <img src="output8_files/image(2039).webp" class="selected">
+            
+            <h2>indicate</h2>
+            <div>Closeup of a car indicator flashing orange before a turn, outdoors, daylight</div>
+            
+                <img src="output8_files/image(1642).webp">
+                <img src="output8_files/image(1641).webp">
+                <img src="output8_files/image(1640).webp">
+                <img src="output8_files/image(1639).webp">
+            
+            <div>Mid shot of a turn signal flashing orange, outdoors, daylight</div>
+                <img src="output8_files/image(1638).webp">
+                <img src="output8_files/image(1637).webp">
+                <img src="output8_files/image(1636).webp">
+                <img src="output8_files/image(1635).webp">
+            
+            <div>Mid shot of a car's turn signal flashing orange at an intersection, outdoors, daylight</div>
+                <img src="output8_files/image(1634).webp">
+                <img src="output8_files/image(1633).webp">
+                <img src="output8_files/image(1632).webp">
+                <img src="output8_files/image(1631).webp">
+            
+            <div>Closeup of a hand pushing the turn signal stalk in a car, stock photograph</div>
+                <img src="output8_files/image(1630).webp">
+                <img src="output8_files/image(1629).webp">
+                <img src="output8_files/image(1628).webp">
+                <img src="output8_files/image(1627).webp">
+            
+            <div>Closeup of a driver's hand signalling a turn, car interior, stock photograph</div>
+                <img src="output8_files/image(1622).webp">
+                <img src="output8_files/image(1621).webp">
+                <img src="output8_files/image(1620).webp">
+                <img src="output8_files/image(1619).webp">
+
+            <div>Illuminated car turn signal</div>
+                
+                <img src="output8_files/image(1618).webp">
+                <img src="output8_files/image(1617).webp">
+                <img src="output8_files/image(1616).webp">
+                <img src="output8_files/image(1615).webp" class="selected">
+            
+            <h2>play records</h2>
+            <div>photograph of a family listening to the record player, wide shot, life magazine 1970</div>
+                
+                <img src="output8_files/image(2038).webp">
+                <img src="output8_files/image(2037).webp">
+                <img src="output8_files/image(2036).webp">
+                <img src="output8_files/image(2035).webp">
+            
+            
+            <div>photograph of a family listening to the record player, wide shot with high detail, life magazine 1970</div>
+            
+                
+                <img src="output8_files/image(2034).webp">
+                <img src="output8_files/image(2033).webp">
+                <img src="output8_files/image(2032).webp">
+                <img src="output8_files/image(2031).webp">
+            
+            
+            <div>photograph of a family listening to the record player, wide shot with high detail, life magazine</div>
+                
+                <img src="output8_files/image(2030).webp">
+                <img src="output8_files/image(2029).webp">
+                <img src="output8_files/image(2028).webp">
+                <img src="output8_files/image(2027).webp">
+            
+            
+            <div>photograph of a family listening to the record player, wide shot with high detail</div>
+                
+                <img src="output8_files/image(2026).webp">
+                <img src="output8_files/image(2025).webp">
+                <img src="output8_files/image(2024).webp">
+                <img src="output8_files/image(2023).webp" style="" class="selected">
+            
+            <h2>ring</h2>
+            <div>Mid shot of a hand dinging a reception bell, studio lighting</div>
+                
+                <img src="output8_files/image(1614).webp">
+                <img src="output8_files/image(1613).webp">
+                <img src="output8_files/image(1612).webp">
+                <img src="output8_files/image(1611).webp" class="selected">
+            
+            <h2>resign</h2>
+            <div>A businesswoman holds her belongings in a cardboard box, quitting her job, stock photograph, indoor lighting</div>
+            
+                
+                <img src="output8_files/image(1610).webp">
+                <img src="output8_files/image(1609).webp">
+                <img src="output8_files/image(1608).webp" class="selected">
+                <img src="output8_files/image(1607).webp">
+            
+            <h2>go</h2>
+            <div>Traffic drives through a green light, outdoor photography, daylight</div>
+            
+                <img src="output8_files/image(1606).webp">
+                <img src="output8_files/image(1605).webp" class="selected">
+                <img src="output8_files/image(1604).webp">
+                <img src="output8_files/image(1603).webp">
+            
+            <h2>massaging</h2>
+            <div>Wide shot of a massuse massaging her client's back, high key studio lighting</div>
+                <p>FLAGGED AS INAPPROPRIATE</p>
+            
+            
+            <div>Wide shot of a physiotherapist massaging a client's back, high key studio lighting</div>
+            
+                <img src="output8_files/image(2022).webp" class="selected">
+                <img src="output8_files/image(2021).webp">
+                <img src="output8_files/image(2020).webp">
+                <img src="output8_files/image(2019).webp">
+            
+            <h2>steer</h2>
+            <div>first person photograph of hands turning a car's steering wheel, motion blur, daylight</div>
+                <img src="output8_files/image(2018).webp">
+                <img src="output8_files/image(2017).webp">
+                <img src="output8_files/image(2016).webp">
+                <img src="output8_files/image(2015).webp">
+            
+            
+            <div>first person photograph of hands turning a car's steering wheel, daylight</div>
+                <img src="output8_files/image(2014).webp">
+                <img src="output8_files/image(2013).webp">
+                <img src="output8_files/image(2012).webp">
+                <img src="output8_files/image(2011).webp">
+            
+            
+            <div>first person photograph of two hands turning a car's steering wheel, daylight</div>
+                <img src="output8_files/image(2010).webp">
+                <img src="output8_files/image(2009).webp">
+                <img src="output8_files/image(2008).webp" class="selected">
+                <img src="output8_files/image(2007).webp">
+            
+            <h2>jump</h2>
+            <div>a smiling young boy jumping in the air, white background, studio lighting</div>
+                <img src="output8_files/image(2006).webp">
+                <img src="output8_files/image(2005).webp" class="selected">
+                <img src="output8_files/image(2004).webp">
+                <img src="output8_files/image(2003).webp">
+            
+            
+            <div>a smiling young child jumping in the air, white background, studio lighting</div>
+                <img src="output8_files/image(2002).webp">
+                <img src="output8_files/image(2001).webp">
+                <img src="output8_files/image(2000).webp">
+                <img src="output8_files/image(1999).webp">
+            
+            <h2>catch it</h2>
+            <div>A fielder successfully catches the ball, medium shot, telephoto lens</div>
+                <img src="output8_files/image(1998).webp">
+                <img src="output8_files/image(1997).webp">
+                <img src="output8_files/image(1996).webp">
+                <img src="output8_files/image(1995).webp">
+            
+            
+            <div>Catching a ball, stock photograph closeup</div>
+                <img src="output8_files/image(1994).webp">
+                <img src="output8_files/image(1993).webp">
+                <img src="output8_files/image(1992).webp">
+                <img src="output8_files/image(1991).webp">
+            
+            
+            <div>Catching a ball in cupped hands, stock photograph closeup</div>
+                <img src="output8_files/image(1990).webp">
+                <img src="output8_files/image(1989).webp" class="selected">
+                <img src="output8_files/image(1988).webp">
+                <img src="output8_files/image(1987).webp">
+            
+            <h2>carrying</h2>
+            <div>stock photography of a smiling woman carrying a box, studio lighting</div>
+                <img src="output8_files/image(1986).webp">
+                <img src="output8_files/image(1985).webp">
+                <img src="output8_files/image(1984).webp">
+                <img src="output8_files/image(1983).webp">
+            
+            
+            <div>stock photography of a smiling woman carrying a box while walking, studio lighting, wide shot</div>
+                <img src="output8_files/image(1982).webp">
+                <img src="output8_files/image(1981).webp">
+                <img src="output8_files/image(1980).webp" class="selected">
+                <img src="output8_files/image(1979).webp">
+            
+            <h2>get out</h2>
+            <div>A man angrily sends the dog out of the house, pointing crossly out the door. Wide shot in natural lighting.</div>
+            
+                <img src="output8_files/image(1974).webp">
+                <img src="output8_files/image(1973).webp">
+                <img src="output8_files/image(1972).webp">
+                <img src="output8_files/image(1971).webp">
+            
+            
+            <div>A man angrily sends the dog out of the house, pointing crossly out the door. Wide shot, indoors.</div>
+                <img src="output8_files/image(1970).webp" class="selected">
+                <img src="output8_files/image(1969).webp">
+                <img src="output8_files/image(1968).webp">
+                <img src="output8_files/image(1967).webp">
+            
+            <h2>draw</h2>
+            <div>Close up of a crayon drawing a colorful picture on paper, bright studio lighting</div>
+                <img src="output8_files/image(1954).webp" class="selected">
+                <img src="output8_files/image(1953).webp">
+                <img src="output8_files/image(1952).webp">
+                <img src="output8_files/image(1951).webp">
+            
+            <h2>slurp</h2>
+            <div>A woman slurps from a mug, stock photography, studio lighting</div>
+                <img src="output8_files/image(1950).webp">
+                <img src="output8_files/image(1949).webp">
+                <img src="output8_files/image(1948).webp">
+                <img src="output8_files/image(1947).webp">
+            
+            
+            <div>A woman slurps from a mug, detailed stock photography, studio lighting</div>
+                <img src="output8_files/image(1946).webp">
+                <img src="output8_files/image(1945).webp" class="selected">
+                <img src="output8_files/image(1944).webp">
+                <img src="output8_files/image(1943).webp">
+            
+            <h2>push</h2>
+            <div>A child pushes another child, white background, stock photography, studio lighting</div>
+                <img src="output8_files/image(1942).webp">
+                <img src="output8_files/image(1941).webp">
+                <img src="output8_files/image(1940).webp">
+                <img src="output8_files/image(1939).webp">
+            
+            
+            <div>Pushing a child on a swing, mid shot, outdoor lighting</div>
+                <img src="output8_files/image(1938).webp">
+                <img src="output8_files/image(1937).webp">
+                <img src="output8_files/image(1936).webp">
+                <img src="output8_files/image(1935).webp">
+            
+            
+            <div>Pushing a child on a swing, wide shot, outdoor lighting</div>
+                <img src="output8_files/image(1934).webp">
+                <img src="output8_files/image(1933).webp">
+                <img src="output8_files/image(1932).webp">
+                <img src="output8_files/image(1931).webp">
+            
+            
+            <div>A mother pushes a child on a swing, wide shot, stock photography</div>
+                <img src="output8_files/image(1930).webp">
+                <img src="output8_files/image(1929).webp">
+                <img src="output8_files/image(1928).webp">
+                <img src="output8_files/image(1927).webp">
+            
+            
+            <div>Closeup of a finger pushing a green button, photograph</div>
+                <img src="output8_files/image(1926).webp">
+                <img src="output8_files/image(1925).webp">
+                <img src="output8_files/image(1924).webp" class="selected">
+                <img src="output8_files/image(1923).webp">
+            
+            <h2>overheat</h2>
+            <div>An overheated car, steam pouring from the engine. Wide shot, roadside, daylight.</div>
+                <img src="output8_files/image(1922).webp">
+                <img src="output8_files/image(1921).webp">
+                <img src="output8_files/image(1920).webp">
+                <img src="output8_files/image(1919).webp" class="selected">
+            
+            <h2>pay it</h2>
+            <div>Holding a bill stamped 'overdue' in red letters, bright studio lighting.</div>
+                <img src="output8_files/image(1918).webp">
+                <img src="output8_files/image(1917).webp">
+                <img src="output8_files/image(1916).webp">
+                <img src="output8_files/image(1915).webp">
+            
+            
+            <div>Holding an overdue water bill, bright studio lighting.</div>
+                <img src="output8_files/image(1914).webp">
+                <img src="output8_files/image(1913).webp">
+                <img src="output8_files/image(1912).webp">
+                <img src="output8_files/image(1911).webp">
+            
+            
+            <div>A bill that needs paying, closeup</div>
+                <img src="output8_files/image(1910).webp">
+                <img src="output8_files/image(1909).webp">
+                <img src="output8_files/image(1908).webp">
+                <img src="output8_files/image(1907).webp">
+            
+            
+            <div>A woman looks stressed as she reads an opened bill, stock photography</div>
+                <img src="output8_files/image(1906).webp">
+                <img src="output8_files/image(1905).webp">
+                <img src="output8_files/image(1904).webp">
+                <img src="output8_files/image(1903).webp" class="selected">
+            
+            <h2>drink</h2>
+            <div>A man drinking from a cup, professional lighting</div>
+                <img src="output8_files/image(1902).webp">
+                <img src="output8_files/image(1901).webp">
+                <img src="output8_files/image(1900).webp">
+                <img src="output8_files/image(1899).webp" class="selected">
+            
+            <h2>turn it down</h2>
+            <div>Closeup of a hand turning a volume knob, studio lighting</div>
+                <img src="output8_files/image(1898).webp">
+                <img src="output8_files/image(1897).webp">
+                <img src="output8_files/image(1896).webp">
+                <img src="output8_files/image(1895).webp">
+            
+            
+            <div>Closeup of a hand turning a volume knob anti-clockwise, studio lighting</div>
+                <img src="output8_files/image(1894).webp">
+                <img src="output8_files/image(1893).webp">
+                <img src="output8_files/image(1892).webp">
+                <img src="output8_files/image(1891).webp" class="selected">
+            
+            <h2>smell</h2>
+            <div>Closeup of a nose smelling a flower, studio lighting, stock photograph</div>
+                <img src="output8_files/image(1890).webp">
+                <img src="output8_files/image(1889).webp">
+                <img src="output8_files/image(1888).webp">
+                <img src="output8_files/image(1887).webp" class="selected">
+            
+            <h2>knocked out</h2>
+            <div>Middleweight boxer knocked out cold in round one, mid shot, sports photography</div>
+                <img src="output8_files/image(1886).webp">
+                <img src="output8_files/image(1885).webp">
+                <img src="output8_files/image(1884).webp">
+                <img src="output8_files/image(1883).webp">
+            
+            
+            <div>Total knockout of a boxer, mid shot</div>
+                <img src="output8_files/image(1882).webp">
+                <img src="output8_files/image(1881).webp">
+                <img src="output8_files/image(1880).webp">
+                <img src="output8_files/image(1879).webp">
+            
+            
+            <div>A boxer lies unconscious in the ring, wide shot</div>
+                <img src="output8_files/image(1878).webp">
+                <img src="output8_files/image(1877).webp">
+                <img src="output8_files/image(1876).webp">
+                <img src="output8_files/image(1875).webp" class="selected">
+            
+            <h2>hang up</h2>
+            <div>A hand hangs up a telephone, studio lighting</div>
+            
+                <img src="output8_files/image(1874).webp">
+                <img src="output8_files/image(1873).webp">
+                <img src="output8_files/image(1872).webp">
+                <img src="output8_files/image(1871).webp">
+            
+            
+            <div>A hand hangs telephone on to the receiver, studio lighting</div>
+                <img src="output8_files/image(1870).webp">
+                <img src="output8_files/image(1869).webp">
+                <img src="output8_files/image(1868).webp">
+                <img src="output8_files/image(1867).webp">
+            
+            
+            <div>A woman hangs up a telephone on to the receiver, studio lighting, stock photography</div>
+                <img src="output8_files/image(1866).webp">
+                <img src="output8_files/image(1865).webp">
+                <img src="output8_files/image(1864).webp">
+                <img src="output8_files/image(1863).webp">
+            
+            
+            <div>A hand hangs up a telephone on to the receiver, studio lighting</div>
+                <img src="output8_files/image(1862).webp">
+                <img src="output8_files/image(1861).webp">
+                <img src="output8_files/image(1860).webp">
+                <img src="output8_files/image(1859).webp" class="selected">
+            
+            <h2>book [a reservation]</h2>
+            <div>A restaurant employee takes a phone call, checking the bookings diary, photograph</div>
+                
+                <img src="output8_files/image(1602).webp">
+                <img src="output8_files/image(1601).webp">
+                <img src="output8_files/image(1600).webp" class="selected">
+                <img src="output8_files/image(1599).webp">
+            
+            <h2>come</h2>
+            <div>Party guests arrive at the front door, photograph taken from inside</div>
+                <img src="output8_files/image(1598).webp">
+                <img src="output8_files/image(1597).webp">
+                <img src="output8_files/image(1596).webp">
+                <img src="output8_files/image(1595).webp">
+            
+            
+            <div>Party guests arrive at the front door, over the shoulder shot, point of view shot</div>
+                <img src="output8_files/image(1594).webp">
+                <img src="output8_files/image(1593).webp">
+                <img src="output8_files/image(1592).webp">
+                <img src="output8_files/image(1591).webp">
+            
+            
+            <div>Party guests arrive, over the shoulder shot, stock photography</div>
+                <img src="output8_files/image(1590).webp">
+                <img src="output8_files/image(1589).webp">
+                <img src="output8_files/image(1588).webp">
+                <img src="output8_files/image(1587).webp">
+            
+            
+            <div>Party guests arrive, stock photography</div>
+                <img src="output8_files/image(1586).webp">
+                <img src="output8_files/image(1585).webp">
+                <img src="output8_files/image(1584).webp">
+                <img src="output8_files/image(1583).webp">
+            
+            
+            <div>A woman greets a couple at the front door, stock photograph</div>
+                <img src="output8_files/image(1582).webp">
+                <img src="output8_files/image(1581).webp">
+                <img src="output8_files/image(1580).webp">
+                <img src="output8_files/image(1579).webp">
+            
+            
+            <div>A woman greets guests at the front door, stock photograph</div>
+                <img src="output8_files/image(1574).webp" class="selected">
+                <img src="output8_files/image(1573).webp">
+                <img src="output8_files/image(1572).webp">
+                <img src="output8_files/image(1571).webp">
+            
+            <h2>drive</h2>
+            <div>A woman drives a car, car interior, low angle medium shot, stock photograph</div>
+            
+                <img src="output8_files/image(1858).webp" class="selected">
+                <img src="output8_files/image(1857).webp">
+                <img src="output8_files/image(1856).webp">
+                <img src="output8_files/image(1855).webp">
+            
+            <h2>sit</h2>
+            <div>A smiling girl sits on a chair, white studio, stock photography</div>
+                
+                <img src="output8_files/image(1854).webp">
+                <img src="output8_files/image(1853).webp">
+                <img src="output8_files/image(1852).webp">
+                <img src="output8_files/image(1851).webp">
+            
+            <div>A smiling girl sits on a chair, plain background</div>
+                <img src="output8_files/image(1850).webp">
+                <img src="output8_files/image(1849).webp">
+                <img src="output8_files/image(1848).webp">
+                <img src="output8_files/image(1847).webp">
+            
+            <div>An older man sits down on a wooden chair, plain background, studio lighting</div>
+                <img src="output8_files/image(1846).webp">
+                <img src="output8_files/image(1845).webp">
+                <img src="output8_files/image(1844).webp">
+                <img src="output8_files/image(1843).webp">
+            
+            <div>An older man lowers himself on to a wooden chair, plain background, studio lighting</div>
+                <img src="output8_files/image(1842).webp">
+                <img src="output8_files/image(1841).webp">
+                <img src="output8_files/image(1840).webp">
+                <img src="output8_files/image(1839).webp">
+            
+            <div>An older man lowers himself into an armchair, studio lighting</div>
+                <img src="output8_files/image(1838).webp">
+                <img src="output8_files/image(1837).webp">
+                <img src="output8_files/image(1836).webp">
+                <img src="output8_files/image(1835).webp">
+            
+            <div>An older man lowers sits in an armchair, studio lighting</div>
+                <img src="output8_files/image(1834).webp" class="selected">
+                <img src="output8_files/image(1833).webp">
+                <img src="output8_files/image(1832).webp">
+                <img src="output8_files/image(1831).webp">
+            
+            <h2>leap</h2>
+            <div>A silhouette leaps between two cliff edges, wide shot, fast shutter speed</div>
+                <img src="output8_files/image(1830).webp">
+                <img src="output8_files/image(1829).webp">
+                <img src="output8_files/image(1828).webp">
+                <img src="output8_files/image(1827).webp" class="selected">
+            
+            <h2>apologise</h2>
+            <div>Man apologising to his partner, studio lighting, stock photograph</div>
+                <img src="output8_files/image(1826).webp" class="selected">
+                <img src="output8_files/image(1825).webp">
+                <img src="output8_files/image(1824).webp">
+                <img src="output8_files/image(1823).webp">
+            
+            <h2>pull</h2>
+            <div>A woman pulls determinedly on a tug-of-war rope, studio lighting, stock photograph</div>
+                <img src="output8_files/image(1822).webp">
+                <img src="output8_files/image(1821).webp">
+                <img src="output8_files/image(1820).webp">
+                <img src="output8_files/image(1819).webp">
+            
+            <div>A woman pulls determinedly on a tug-of-war rope, long shot, studio lighting, stock photograph</div>
+                <img src="output8_files/image(1818).webp">
+                <img src="output8_files/image(1817).webp">
+                <img src="output8_files/image(1816).webp">
+                <img src="output8_files/image(1815).webp" class="selected">
+            
+            <h2>lift</h2>
+            <div>A weightlifter lifts a heavy weight, sports photography, high detail</div>
+                <img src="output8_files/image(1814).webp">
+                <img src="output8_files/image(1813).webp">
+                <img src="output8_files/image(1812).webp">
+                <img src="output8_files/image(1811).webp" class="selected">
+       
+    <h2>saluting [soldiers do this]</h2>
+    <div>a soldier saluting, news photograph</div>
+        <img src="output8_files/image(1470).webp">
+        <img src="output8_files/image(1469).webp">
+        <img src="output8_files/image(1468).webp">
+        <img src="output8_files/image(1467).webp" class="selected">
+    
+    <h2>conducting (directing)[heisinfrontofanorchestra]</h2>
+    <div>conductor conducting an orchestra, black backdrop</div>
+        <img src="output8_files/image(1466).webp">
+        <img src="output8_files/image(1465).webp">
+        <img src="output8_files/image(1464).webp">
+        <img src="output8_files/image(1463).webp">
+    
+    
+    <div>conductor conducting an orchestra, shot from behind</div>
+        <img src="output8_files/image(1462).webp">
+        <img src="output8_files/image(1461).webp" class="selected">
+        <img src="output8_files/image(1460).webp">
+        <img src="output8_files/image(1459).webp">
+    
+    <h2>bowling [his fingers are in the ball]</h2>
+    <div>a man bowling at a ten pin bowling alley, action shot</div>
+        <img src="output8_files/image(1458).webp">
+        <img src="output8_files/image(1457).webp">
+        <img src="output8_files/image(1456).webp">
+    <img src="output8_files/image_694.webp" class="selected">
+    
+    <h2>knitting [using yarn]</h2>
+    <div>closeup of hands knitting, well lit</div>
+    <img src="output8_files/image_1275.webp">
+    <img src="output8_files/image_167.webp">
+    <img src="output8_files/image_976.webp">
+    <img src="output8_files/image_1463.webp">
+    
+    
+    <div>closeup of hands knitting using thick white knitting needles, well lit</div>
+    <img src="output8_files/image_699.webp">
+    <img src="output8_files/image_1486.webp">
+    <img src="output8_files/image_144.webp" class="selected">
+    <img src="output8_files/image_670.webp">
+    
+    <h2>swimming [you do it in a pool]</h2>
+    <div>a woman swimming in an olympic pool</div>
+    <img src="output8_files/image_438.webp">
+    <img src="output8_files/image_437.webp">
+    <img src="output8_files/image_1601.webp">
+    <img src="output8_files/image_1556.webp">
+    
+    
+    <div>a woman swimming in an olympic pool, action shot</div>
+    <img src="output8_files/image_294.webp">
+    <img src="output8_files/image_308.webp">
+    <img src="output8_files/image_845.webp">
+    <img src="output8_files/image_303.webp" class="selected">
+    
+    <h2>dripping [that is a faucet]</h2>
+    <div>closeup of a chrome tap dripping water, high reflection, studio lighting</div>
+    <img src="output8_files/image_1129.webp" class="selected">
+    <img src="output8_files/image_1245.webp">
+    <img src="output8_files/image_509.webp">
+    <img src="output8_files/image_1030.webp">
+    
+    <h2>boxing (fighting) [a sport using gloves]</h2>
+    <div>two boxers in a boxing ring, sports photograph</div>
+    <img src="output8_files/image_1383.webp">
+    <img src="output8_files/image_1193.webp" class="selected">
+    <img src="output8_files/image_628.webp">
+    <img src="output8_files/image_587.webp">
+    
+    <h2>curtysing (courtesying) [girls do this]</h2>
+    <div>a young girl curtsies before royalty, news photograph</div>
+    <img src="output8_files/image_1408.webp">
+    <img src="output8_files/image_267.webp">
+    <img src="output8_files/image_852.webp">
+    <img src="output8_files/image_988.webp">
+    
+    
+    <div>a young girl curtsies in a dress, stock photography</div>
+    <img src="output8_files/image_1308.webp">
+    <img src="output8_files/image_1297.webp">
+    <img src="output8_files/image_1229.webp">
+    <img src="output8_files/image_1479.webp" class="selected">
+    
+    
+    <div>a young girl curtsies, stock photography</div>
+    <!-- <img  src="output_files/image_599.webp" >
+    <img  src="output_files/image_844.webp" >
+    <img  src="output_files/image_686.webp" >
+    <img  src="output_files/image_1445.webp" > -->
+    <img src="output8_files/image_388.webp">
+    <img src="output8_files/image_1186.webp">
+    <img src="output8_files/image_565.webp">
+    <img src="output8_files/image_1540.webp">
+    
+    
+    <div>a woman curtsies, stock photography</div>
+    <!-- <img  src="output_files/image_733.webp" >
+    <img  src="output_files/image_096.webp" >
+    <img  src="output_files/image_1317.webp" >
+    <img  src="output_files/image_178.webp" > -->
+    <img src="output8_files/image_377.webp">
+    <img src="output8_files/image_215.webp">
+    <img src="output8_files/image_715.webp">
+    <img src="output8_files/image_1249.webp">
+    
+    
+    <div>a woman curtsies before the queen, photograph</div>
+    <img src="output8_files/image_1504.webp">
+    <img src="output8_files/image_412.webp">
+    <img src="output8_files/image_1465.webp">
+    <img src="output8_files/image_1401.webp">
+    
+    
+    <div>a girl curtsies her dress before the queen, photograph</div>
+    <img src="output8_files/image_218.webp">
+    <img src="output8_files/image_1538.webp">
+    <img src="output8_files/image_1626.webp">
+    <img src="output8_files/image_410.webp">
+    
+    <h2>smoking [you do it with a cigarette]</h2>
+    <div>a man smoking a cigarette, outdoor lighting</div>
+    <img src="output8_files/image_790.webp" class="selected">
+    <img src="output8_files/image_1285.webp">
+    <img src="output8_files/image_1508.webp">
+    <img src="output8_files/image_943.webp">
+    
+    <h2>proposing [having to do with marriage]</h2>
+    <div>a man proposes to a woman on one knee, stock photograph, studio lighting</div>
+    <img src="output8_files/image_128.webp">
+    <img src="output8_files/image_271.webp">
+    <img src="output8_files/image_237.webp">
+    <img src="output8_files/image_653.webp" class="selected">
+    
+    
+    <div>a man proposes to a smiling, happy woman on one knee, stock photograph, studio lighting</div>
+    <img src="output8_files/image_1122.webp">
+    <img src="output8_files/image_060.webp">
+    <img src="output8_files/image_1341.webp">
+    <img src="output8_files/image_1238.webp">
+    
+    <h2>throwing (pitching) [baseball players do this]</h2>
+    <div>a pitcher pitches a baseball, sports photograph</div>
+    <img src="output8_files/image_485.webp">
+    <img src="output8_files/image_313.webp">
+    <img src="output8_files/image_242.webp">
+    <img src="output8_files/image_933.webp" class="selected">
+    
+    <h2>shaking (greeting) [you do this when you meet someone]</h2>
+    <div>closeup of hands shaking hands, studio lighting</div>
+    <img src="output8_files/image_995.webp">
+    <img src="output8_files/image_1500.webp">
+    <img src="output8_files/image_258.webp" class="selected">
+    <img src="output8_files/image_1018.webp">
+    
+    <h2>running (jogging) [a way of exercising]</h2>
+    <div>a jogger running in a park, outdoor lighting</div>
+    <img src="output8_files/image_318.webp" class="selected">
+    <img src="output8_files/image_198.webp">
+    <img src="output8_files/image_559.webp">
+    <img src="output8_files/image_1007.webp">
+    
+    <h2>milking [doing something to a cow]</h2>
+    <div>mid shot of a farmer milking a cow</div>
+    <img src="output8_files/image_446.webp">
+    <img src="output8_files/image_1256.webp">
+    <img src="output8_files/image_1191.webp">
+    <img src="output8_files/image_724.webp">
+    
+    
+    <div>closeup of hands milking a cow</div>
+    <img src="output8_files/image_075.webp">
+    <img src="output8_files/image_919.webp">
+    <img src="output8_files/image_272.webp">
+    <img src="output8_files/image_660.webp">
+    
+    
+    <div>closeup of hands milking a cow</div>
+    <img src="output8_files/image_993.webp">
+    <img src="output8_files/image_1311.webp">
+    <img src="output8_files/image_745.webp">
+    <img src="output8_files/image_560.webp">
+    
+    
+    <div>milking a cow, stock photograph</div>
+    <img src="output8_files/image_751.webp">
+    <img src="output8_files/image_162.webp">
+    <img src="output8_files/image_392.webp">
+    <img src="output8_files/image_835.webp">
+    
+    
+    <div>a farmer milking a cow, painting</div>
+    <img src="output8_files/image_636.webp">
+    <img src="output8_files/image_1528.webp" class="selected">
+    <img src="output8_files/image_445.webp">
+    <img src="output8_files/image_590.webp">
+    
+    
+    <div>a maid on a stool milking a cow, painting</div>
+    <img src="output8_files/image_666.webp">
+    <img src="output8_files/image_549.webp">
+    <img src="output8_files/image_1177.webp">
+    <img src="output8_files/image_063.webp">
+    
+    <h2>bowing [performers do this]</h2>
+    <div>smiling performers bow on stage following a performance, news photograph</div>
+    <img src="output8_files/image_1384.webp">
+    <img src="output8_files/image_390.webp">
+    <img src="output8_files/image_1172.webp">
+    <img src="output8_files/image_540.webp">
+    
+    
+    <div>a smiling cast bows deeply on stage, news photograph</div>
+    <img src="output8_files/image_1624.webp">
+    <img src="output8_files/image_315.webp">
+    <img src="output8_files/image_1485.webp">
+    <img src="output8_files/image_493.webp">
+    
+    
+    <div>a performer bows, stock photograph</div>
+    <img src="output8_files/image_738.webp">
+    <img src="output8_files/image_977.webp">
+    <img src="output8_files/image_078.webp">
+    <img src="output8_files/image_502.webp">
+    
+    
+    <div>a performer bowing, stock photograph</div>
+    <img src="output8_files/image_223.webp">
+    <img src="output8_files/image_618.webp">
+    <img src="output8_files/image_971.webp">
+    <img src="output8_files/image_1447.webp">
+    
+    
+    <div>a magician bows deeply to the audience, theatre photograph</div>
+    <img src="output8_files/image_1351.webp">
+    <img src="output8_files/image_1495.webp">
+    <img src="output8_files/image_747.webp">
+    <img src="output8_files/image_037.webp">
+    
+    
+    <div>japanese businessmen bow to one another, photograph</div>
+    <img src="output8_files/image_416.webp">
+    <img src="output8_files/image_433.webp">
+    <img src="output8_files/image_520.webp" class="selected">
+    <img src="output8_files/image_516.webp">
+    
+    <h2>exercising [he is in a gym]</h2>
+    <div>A man exercises at a local gym. Gym equipment is visible around him.</div>
+    <img src="output8_files/image_1108.webp">
+    <img src="output8_files/image_1134.webp" class="selected">
+    <img src="output8_files/image_020.webp">
+    <img src="output8_files/image_547.webp">
+    
+    <h2>skiing [a sport done on snow]</h2>
+    <div>Wide shot of a skiier on snowy slopes</div>
+    <img src="output8_files/image_1387.webp">
+    <img src="output8_files/image_854.webp">
+    <img src="output8_files/image_1059.webp">
+    <img src="output8_files/image_723.webp" class="selected">
+    
+    <h2>surfing (surfboarding) [he is on waves]</h2>
+    <div>Wide shot of a surfer on an ocean wave</div>
+    <img src="output8_files/image_1273.webp">
+    <img src="output8_files/image_292.webp">
+    <img src="output8_files/image_219.webp" class="selected">
+    <img src="output8_files/image_1429.webp">
+    
+    <h2>cutting [you do it with scissors]</h2>
+    <div>Closeup of a pair of scissors cutting paper, studio lighting</div>
+    <img src="output8_files/image_625.webp">
+    <img src="output8_files/image_1512.webp">
+    <img src="output8_files/image_816.webp">
+    <img src="output8_files/image_097.webp">
+    
+    
+    <div>Scissors cutting a sheet of paper, studio lighting</div>
+    <img src="output8_files/image_1065.webp">
+    <img src="output8_files/image_987.webp">
+    <img src="output8_files/image_1376.webp">
+    <img src="output8_files/image_1066.webp">
+    
+    
+    <div>A hand cuts paper with scissors, stock photography</div>
+    <img src="output8_files/image_426.webp">
+    <img src="output8_files/image_231.webp">
+    <img src="output8_files/image_1496.webp">
+    <img src="output8_files/image_355.webp">
+    
+    
+    <div>Cutting paper with scissors, stock photography</div>
+    <img src="output8_files/image_1247.webp" class="selected">
+    <img src="output8_files/image_525.webp">
+    <img src="output8_files/image_973.webp">
+    <img src="output8_files/image_693.webp">
+    
+    
+    <div>Cutting paper with a pair of scissors, stock photography</div>
+    
+    <img src="output8_files/image_1418.webp">
+    <img src="output8_files/image_1534.webp">
+    <img src="output8_files/image_028.webp">
+    <img src="output8_files/image_966.webp">
+    
+    <h2>knighting (dubbing) [the queen does this]</h2>
+    <div>The knighting ceremony</div>
+    <img src="output8_files/image_1255.webp">
+    <img src="output8_files/image_1487.webp">
+    <img src="output8_files/image_204.webp">
+    <img src="output8_files/image_1600.webp">
+    
+    
+    <div>The knighting ceremony, man being knighted by the king, rennaisance painting</div>
+    <img src="output8_files/image_1565.webp">
+    <img src="output8_files/image_319.webp">
+    <img src="output8_files/image_1574.webp">
+    <img src="output8_files/image_897.webp">
+    
+    
+    <div>A kneeling man is knighted by the king, rennaisance painting</div>
+    <img src="output8_files/image_1581.webp">
+    <img src="output8_files/image_305.webp">
+    <img src="output8_files/image_740.webp">
+    <img src="output8_files/image_1561.webp">
+    
+    
+    <div>A kneeling man is knighted by the king's sword, rennaisance painting</div>
+    <img src="output8_files/image_023.webp">
+    <img src="output8_files/image_811.webp">
+    <img src="output8_files/image_316.webp">
+    <img src="output8_files/image_019.webp">
+    
+    
+    <div>The king knights a man with his sword, renaissance painting</div>
+    <img src="output8_files/image_1615.webp">
+    <img src="output8_files/image_1053.webp">
+    <img src="output8_files/image_385.webp">
+    <img src="output8_files/image_1051.webp">
+    
+    
+    <div>The knighting of sir lancelot, renaissance painting</div>
+    <img src="output8_files/image_1575.webp">
+    <img src="output8_files/image_1595.webp">
+    <img src="output8_files/image_1618.webp">
+    <img src="output8_files/image_1421.webp">
+    
+    <h2>sleeping [you do it at night]</h2>
+    <div>closeup of a sleeping child, smiling slightly, stock photograph</div>
+    <img src="output8_files/image_017.webp">
+    <img src="output8_files/image_960.webp">
+    <img src="output8_files/image_191.webp">
+    <img src="output8_files/image_117.webp">
+    
+    
+    <div>mid shot of a child sleeping on a pillow, smiling slightly, stock photograph</div>
+    <img src="output8_files/image_499.webp">
+    <img src="output8_files/image_1038.webp">
+    <img src="output8_files/image_1258.webp">
+    <img src="output8_files/image_826.webp">
+    
+    
+    <div>mid shot of a child sleeping on a pillow, stock photograph</div>
+    <img src="output8_files/image_1232.webp" class="selected">
+    <img src="output8_files/image_668.webp">
+    <img src="output8_files/image_1246.webp">
+    <img src="output8_files/image_1440.webp">
+    
+    <h2>floating [staying on top of the water]</h2>
+    <div>mid shot of a woman floating peacefully in a pool, stock photograph</div>
+    <img src="output8_files/image_766.webp">
+    <img src="output8_files/image_1190.webp" class="selected">
+    <img src="output8_files/image_1138.webp">
+    <img src="output8_files/image_126.webp">
+    
+    
+    <div>wide shot of a woman floating peacefully in a pool, stock photograph</div>
+    <img src="output8_files/image_1353.webp">
+    <img src="output8_files/image_1227.webp">
+    <img src="output8_files/image_613.webp">
+    <img src="output8_files/image_440.webp">
+    
+    
+    <div>wide shot of a woman floating peacefully on the surface of water, stock photograph</div>
+    <img src="output8_files/image_1106.webp">
+    <img src="output8_files/image_1130.webp">
+    <img src="output8_files/image_893.webp">
+    <img src="output8_files/image_274.webp">
+    
+    
+    <div>wide shot of a woman floating peacefully in the sea, stock photograph</div>
+    <img src="output8_files/image_139.webp">
+    <img src="output8_files/image_044.webp">
+    <img src="output8_files/image_1085.webp">
+    <img src="output8_files/image_863.webp">
+    
+    <h2>reading</h2>
+    <div>a boy reading a book, studio lighting</div>
+    <img src="output8_files/image_942.webp" class="selected">
+    <img src="output8_files/image_256.webp">
+    <img src="output8_files/image_1162.webp">
+    <img src="output8_files/image_610.webp">
+    
+    <h2>climbing [going up a mountain]</h2>
+    <div>a mountain climber in the alps, national geographic</div>
+    <img src="output8_files/image_1434.webp">
+    <img src="output8_files/image_120.webp">
+    <img src="output8_files/image_497.webp">
+    <img src="output8_files/image_907.webp" class="selected">
+    
+    <h2>sawing [cutting a log in two]</h2>
+    <div>closeup of a log being sawn, sawdust flying, fast shutter speed</div>
+    <img src="output8_files/image_771.webp">
+    <img src="output8_files/image_324.webp">
+    <img src="output8_files/image_843.webp">
+    <img src="output8_files/image_1605.webp">
+    
+    
+    <div>closeup of a saw cutting timber, fast shutter speed</div>
+    <img src="output8_files/image_302.webp">
+    <img src="output8_files/image_1564.webp">
+    <img src="output8_files/image_878.webp">
+    <img src="output8_files/image_295.webp">
+    
+    
+    <div>closeup of a handsaw cutting timber</div>
+    <img src="output8_files/image_213.webp">
+    <img src="output8_files/image_648.webp">
+    <img src="output8_files/image_985.webp">
+    <img src="output8_files/image_566.webp">
+    
+    
+    <div>closeup of a carpenter using a handsaw on timber</div>
+    <img src="output8_files/image_180.webp">
+    <img src="output8_files/image_990.webp">
+    <img src="output8_files/image_1102.webp" class="selected">
+    <img src="output8_files/image_644.webp">
+    
+    
+    <div>closeup of a carpenter using a handsaw on timber, studio lighting</div>
+    <img src="output8_files/image_131.webp">
+    <img src="output8_files/image_1240.webp">
+    <img src="output8_files/image_1140.webp">
+    <img src="output8_files/image_1209.webp">
+    
+    
+    <div>closeup of a carpenter sawing timber, studio lighting</div>
+    <img src="output8_files/image_1525.webp">
+    <img src="output8_files/image_684.webp">
+    <img src="output8_files/image_1001.webp">
+    <img src="output8_files/image_1070.webp">
+    
+    <h2>sailing (boating) [the wind is moving that]</h2>
+    <div>a yacht sailing on the sea, daylight, long shot</div>
+    <img src="output8_files/image_1272.webp">
+    <img src="output8_files/image_130.webp">
+    <img src="output8_files/image_714.webp">
+    <img src="output8_files/image_1472.webp" class="selected">
+    
+    <h2>rowing [using oars to make a boat go]</h2>
+    <div>rowing a rowboat across a pond with oars, wide shot</div>
+    <img src="output8_files/image_431.webp">
+    <img src="output8_files/image_1578.webp" class="selected">
+    <img src="output8_files/image_1439.webp">
+    <img src="output8_files/image_1468.webp">
+    
+    <h2>diving [entering the water]</h2>
+    <div>a swimmer dives into the pool, sports photograph, high speed shutter</div>
+    <img src="output8_files/image_1416.webp">
+    <img src="output8_files/image_805.webp">
+    <img src="output8_files/image_1588.webp">
+    <img src="output8_files/image_1584.webp">
+    
+    
+    <div>an olympic diver enters the water, sports photograph, high speed shutter</div>
+    <img src="output8_files/image_1620.webp">
+    <img src="output8_files/image_121.webp">
+    <img src="output8_files/image_1340.webp">
+    <img src="output8_files/image_1568.webp">
+    
+    
+    <div>a diver enters the water with a splash, news photograph</div>
+    <img src="output8_files/image_378.webp">
+    <img src="output8_files/image_917.webp">
+    <img src="output8_files/image_519.webp">
+    <img src="output8_files/image_327.webp">
+    
+    
+    <div>a springboard diver enters the water with a splash, news photograph, indoor pool</div>
+    <img src="output8_files/image_1042.webp">
+    <img src="output8_files/image_246.webp">
+    <img src="output8_files/image_1335.webp">
+    <img src="output8_files/image_1257.webp">
+    
+    
+    <div>A 10m platform diver enters the water with a splash, wide shot, news photograph</div>
+    <img src="output8_files/image_226.webp">
+    <img src="output8_files/image_810.webp">
+    <img src="output8_files/image_435.webp">
+    <img src="output8_files/image_1573.webp">
+    
+    
+    <div>A diver enters the water with a splash, wide shot, Olympic Games</div>
+    <img src="output8_files/image_1612.webp">
+    <img src="output8_files/image_921.webp">
+    <img src="output8_files/image_1553.webp">
+    <img src="output8_files/image_1424.webp">
+    
+    <h2>lassoing (roping) [cowboys do it]</h2>
+    <div>A cowboy whirls a lasso rope, stock photograph</div>
+    <img src="output8_files/image_850.webp">
+    <img src="output8_files/image_1511.webp">
+    <img src="output8_files/image_706.webp">
+    <img src="output8_files/image_1219.webp">
+    
+    
+    <div>A cowboy spins a lasso, stock photograph</div>
+    <img src="output8_files/image_1068.webp">
+    <img src="output8_files/image_1356.webp">
+    <img src="output8_files/image_420.webp">
+    <img src="output8_files/image_1441.webp">
+    
+    
+    <div>A cowboy spins a lasso, wide shot, stock photograph</div>
+    <img src="output8_files/image_1237.webp">
+    <img src="output8_files/image_484.webp">
+    <img src="output8_files/image_1281.webp">
+    <img src="output8_files/image_361.webp" class="selected">
+    
+    <h2>pointing [you do it with your index finger]</h2>
+    <div>Closeup of a hand pointing, studio lighting</div>
+    <img src="output8_files/image_357.webp" class="selected">
+    <img src="output8_files/image_1467.webp">
+    <img src="output8_files/image_1274.webp">
+    <img src="output8_files/image_860.webp">
+    
+    <h2>pouring [filling up a glass]</h2>
+    <div>Closeup of a jug pouring into a glass, studio lighting</div>
+    <img src="output8_files/image_1371.webp" class="selected">
+    <img src="output8_files/image_646.webp">
+    <img src="output8_files/image_371.webp">
+    <img src="output8_files/image_1161.webp">
+    
+    <h2>kneeling [some people do this when they pray]</h2>
+    <div>A person kneeling, white studio backdrop</div>
+    <img src="output8_files/image_1058.webp">
+    <img src="output8_files/image_1166.webp">
+    <img src="output8_files/image_1006.webp">
+    <img src="output8_files/image_1251.webp">
+    
+    
+    <div>A person kneeling on a yoga mat, studio lighting</div>
+    <img src="output8_files/image_650.webp" class="selected">
+    <img src="output8_files/image_405.webp">
+    <img src="output8_files/image_877.webp">
+    <img src="output8_files/image_1277.webp">
+    
+    <h2>typing (typewriting) [secretaries do it]</h2>
+    <div>Hands typing on a computer keyboard, motion blur</div>
+    <img src="output8_files/image_1325.webp">
+    <img src="output8_files/image_912.webp">
+    <img src="output8_files/image_1339.webp">
+    <img src="output8_files/image_210.webp" class="selected">
+    
+    <h2>ironing [youdothiswhenyourclothesarewrinkled]</h2>
+    <div>Closeup of a clothes iron ironing clothes, studio lighting</div>
+    <img src="output8_files/image_1045.webp">
+    <img src="output8_files/image_1069.webp">
+    <img src="output8_files/image_1310.webp">
+    <img src="output8_files/image_1276.webp">
+    
+    
+    <div>Closeup of a hand ironing clothes, stock photography</div>
+    <img src="output8_files/image_649.webp">
+    <img src="output8_files/image_807.webp" class="selected">
+    <img src="output8_files/image_247.webp">
+    <img src="output8_files/image_1260.webp">
+    
+    <h2>sweeping [cleaning up the floor]</h2>
+    <div>A man sweeping the floor, stock photography</div>
+    <img src="output8_files/image_997.webp">
+    <img src="output8_files/image_1576.webp">
+    <img src="output8_files/image_903.webp">
+    <img src="output8_files/image_1048.webp">
+    
+    
+    <div>A man sweeping the floor, studio lighting</div>
+    <img src="output8_files/image_1517.webp">
+    <img src="output8_files/image_1188.webp">
+    <img src="output8_files/image_511.webp">
+    <img src="output8_files/image_1136.webp">
+    
+    
+    <div>Sweeping the floor with a broom, studio lighting</div>
+    <img src="output8_files/image_402.webp">
+    <img src="output8_files/image_1052.webp">
+    <img src="output8_files/image_1057.webp">
+    <img src="output8_files/image_090.webp" class="selected">
+    
+    <h2>brushing [fixing hair]</h2>
+    <div>A woman brushing her long hair with a hairbrush, studio lighting, stock photography</div>
+    <img src="output8_files/image_1307.webp">
+    <img src="output8_files/image_1116.webp">
+    <img src="output8_files/image_314.webp">
+    <img src="output8_files/image_1265.webp">
+    
+    
+    <div>A woman brushing her hair with a hairbrush, studio lighting, stock photography</div>
+    <img src="output8_files/image_856.webp" class="selected">
+    <img src="output8_files/image_1290.webp">
+    <img src="output8_files/image_1304.webp">
+    <img src="output8_files/image_140.webp">
+    
+    
+    <div>closeup of a hairbrush brushing hair, studio lighting, stock photography</div>
+    <img src="output8_files/image_1074.webp">
+    <img src="output8_files/image_861.webp">
+    <img src="output8_files/image_1005.webp">
+    <img src="output8_files/image_1477.webp">
+    
+    
+    <div>closeup of a hair with a hairbrush in it, studio lighting, stock photography</div>
+    <img src="output8_files/image_782.webp">
+    <img src="output8_files/image_642.webp">
+    <img src="output8_files/image_924.webp">
+    <img src="output8_files/image_062.webp">
+    
+    
+    <div>Closeup of a woman brushing her hair with a hairbrush, studio lighting, stock photography</div>
+    <img src="output8_files/image_495.webp">
+    <img src="output8_files/image_179.webp">
+    <img src="output8_files/image_884.webp">
+    <img src="output8_files/image_008.webp">
+    
+    <h2>crying [showing you are sad]</h2>
+    <div>a child crying, stock photograph</div>
+    <img src="output8_files/image_1360.webp">
+    <img src="output8_files/image_536.webp">
+    <img src="output8_files/image_1385.webp">
+    <img src="output8_files/image_574.webp" class="selected">
+    
+    <h2>shoveling (digging) [makingaholeintheground]</h2>
+    <div>A man shovelling rocks, outdoor lighting</div>
+    <img src="output8_files/image_836.webp">
+    <img src="output8_files/image_886.webp">
+    <img src="output8_files/image_114.webp">
+    <img src="output8_files/image_748.webp">
+    
+    
+    <div>A man shovelling soil, outdoor lighting</div>
+    <img src="output8_files/image_840.webp">
+    <img src="output8_files/image_1614.webp">
+    <img src="output8_files/image_746.webp">
+    <img src="output8_files/image_614.webp" class="selected">
+    
+    <h2>fencing [sport using swords]</h2>
+    <div>A fencing match, sports photography</div>
+    <img src="output8_files/image_1062.webp">
+    <img src="output8_files/image_1530.webp">
+    <img src="output8_files/image_021.webp">
+    <img src="output8_files/image_1261.webp">
+    
+    
+    <div>wide shot of a fencing match, sports photography</div>
+    <img src="output8_files/image_456.webp">
+    <img src="output8_files/image_483.webp" class="selected">
+    <img src="output8_files/image_895.webp">
+    <img src="output8_files/image_925.webp">
+    
+    <h2>erupting (spewing) [that is a volcano]</h2>
+    <div>Erupting volcano, distance photograph, national geographic</div>
+    <img src="output8_files/image_211.webp">
+    <img src="output8_files/image_555.webp">
+    <img src="output8_files/image_737.webp">
+    <img src="output8_files/image_1303.webp" class="selected">
+</div>
+
+<div class="Sentences">
+    
+    <h1>Sentences</h1>
+    <h2>[nurse chasing butcher]</h2>
+    <div>A butcher in an apron, chasing a nurse in uniform down the street, action photograph</div>
+    
+    <img src="output8_files/image_770.webp">
+    <img src="output8_files/image_1167.webp">
+    <img src="output8_files/image_1631.webp">
+    <img src="output8_files/image_828.webp">
+    
+    
+    <div>A butcher in an apron, chasing a woman in nurse's uniform down the street, action photograph</div>
+    <img src="output8_files/image_329.webp">
+    <img src="output8_files/image_1168.webp">
+    <img src="output8_files/image_833.webp">
+    <img src="output8_files/image_264.webp">
+    
+    
+    <div>A butcher in an apron, chasing a woman in nurse's uniform, action photograph</div>
+    <img src="output8_files/image_788.webp">
+    <img src="output8_files/image_1295.webp">
+    <img src="output8_files/image_1550.webp">
+    <img src="output8_files/image_923.webp">
+    
+    
+    <div>A butcher in an apron, chasing a woman in nurse's uniform, high shutter speed photograph</div>
+    <img src="output8_files/image_370.webp">
+    <img src="output8_files/image_785.webp">
+    <img src="output8_files/image_159.webp">
+    <img src="output8_files/image_1480.webp">
+    
+    
+    <div>A butcher chasing a nurse, high shutter speed photograph</div>
+    <img src="output8_files/image_638.webp">
+    <img src="output8_files/image_1284.webp" class="selected">
+    <img src="output8_files/image_406.webp">
+    <img src="output8_files/image_1474.webp">
+    
+    
+    <div>A butcher chasing a uniformed nurse, high shutter speed photograph</div>
+    <img src="output8_files/image_842.webp">
+    <img src="output8_files/image_146.webp">
+    <img src="output8_files/image_341.webp">
+    <img src="output8_files/image_122.webp">
+    
+    <h2>[singer photographing soldier]</h2>
+    <div>A man holding a microphone photographs a soldier</div>
+    <img src="output8_files/image_1180.webp">
+    <img src="output8_files/image_460.webp">
+    <img src="output8_files/image_205.webp">
+    <img src="output8_files/image_940.webp">
+    
+    
+    <div>A singing man photographs a soldier</div>
+    <img src="output8_files/image_1560.webp">
+    <img src="output8_files/image_1513.webp">
+    <img src="output8_files/image_528.webp">
+    <img src="output8_files/image_598.webp">
+    
+    
+    <div>An entertainer photographs a soldier</div>
+    <img src="output8_files/image_756.webp">
+    <img src="output8_files/image_551.webp">
+    <img src="output8_files/image_188.webp">
+    <img src="output8_files/image_597.webp">
+    
+    
+    <div>An entertainer in costume takes a photograph of a soldier</div>
+    <img src="output8_files/image_1592.webp">
+    <img src="output8_files/image_125.webp">
+    <img src="output8_files/image_818.webp">
+    <img src="output8_files/image_265.webp">
+    
+    
+    <div>A singing man photographs a soldier at attention</div>
+    <img src="output8_files/image_734.webp">
+    <img src="output8_files/image_1365.webp">
+    <img src="output8_files/image_1606.webp">
+    <img src="output8_files/image_562.webp">
+    
+    
+    <div>A singing man takes a photo of a soldier at attention</div>
+    <img src="output8_files/image_605.webp">
+    <img src="output8_files/image_257.webp">
+    <img src="output8_files/image_1330.webp" class="selected">
+    <img src="output8_files/image_744.webp">
+    
+    <h2>[woman eating apple]</h2>
+    <div>Closeup of a woman biting an apple, stock photography</div>
+    
+    <img src="output8_files/image_1287.webp">
+    <img src="output8_files/image_585.webp">
+    <img src="output8_files/image_1289.webp">
+    <img src="output8_files/image_1114.webp" class="selected">
+    
+    <h2>[male crying]</h2>
+    <div>Closeup of a boy crying, bright studio lighting, stock photography</div>
+    <img src="output8_files/image_1448.webp">
+    <img src="output8_files/image_1298.webp">
+    <img src="output8_files/image_681.webp">
+    <img src="output8_files/image_1270.webp" class="selected">
+    
+    
+    <div>Closeup of a boy with tears on his face, bright studio lighting, stock photography</div>
+    <img src="output8_files/image_1123.webp">
+    <img src="output8_files/image_800.webp">
+    <img src="output8_files/image_1104.webp">
+    <img src="output8_files/image_1425.webp">
+    
+    
+    <div>Closeup of a crying boy with tears, bright studio lighting, stock photography</div>
+    <img src="output8_files/image_794.webp">
+    <img src="output8_files/image_143.webp">
+    <img src="output8_files/image_789.webp">
+    <img src="output8_files/image_593.webp">
+    
+    
+    <div>Closeup of a boy with tears on his face, bright studio lighting, stock photography</div>
+    <img src="output8_files/image_1354.webp">
+    <img src="output8_files/image_1267.webp">
+    <img src="output8_files/image_1228.webp">
+    <img src="output8_files/image_501.webp">
+    
+    
+    <div>Closeup of a crying boy, bright studio lighting, stock photography</div>
+    <img src="output8_files/image_665.webp">
+    <img src="output8_files/image_1327.webp">
+    <img src="output8_files/image_1032.webp">
+    <img src="output8_files/image_1233.webp">
+    
+    
+    <div>Closeup of a crying boy</div>
+    <img src="output8_files/image_049.webp">
+    <img src="output8_files/image_1539.webp">
+    <img src="output8_files/image_238.webp">
+    <img src="output8_files/image_478.webp">
+    
+    <h2>[man sitting]</h2>
+    <div>A man sitting comfortably in an armchair</div>
+    <img src="output8_files/image_047.webp">
+    <img src="output8_files/image_217.webp">
+    <img src="output8_files/image_1490.webp">
+    <img src="output8_files/image_1061.webp">
+    
+    
+    <div>A man sitting on a chair, stock photograph</div>
+    <img src="output8_files/image_209.webp">
+    <img src="output8_files/image_1482.webp">
+    <img src="output8_files/image_224.webp">
+    <img src="output8_files/image_455.webp">
+    
+    
+    <div>A smiling man sitting on a chair, stock photograph</div>
+    <img src="output8_files/image_291.webp">
+    <img src="output8_files/image_052.webp">
+    <img src="output8_files/image_1189.webp">
+    <img src="output8_files/image_1527.webp">
+    
+    
+    <div>Wide shot of a smiling man sitting on a chair, stock photograph</div>
+    <img src="output8_files/image_383.webp">
+    <img src="output8_files/image_1367.webp">
+    <img src="output8_files/image_1334.webp" class="selected">
+    <img src="output8_files/image_332.webp">
+    
+    <h2>[blue flower in cup]</h2>
+    <div>A blue flower inside a coffe mug, studio lighting</div>
+    <img src="output8_files/image_900.webp">
+    <img src="output8_files/image_539.webp">
+    <img src="output8_files/image_582.webp">
+    <img src="output8_files/image_164.webp">
+    
+    
+    <div>A blue flower inside a coffe mug, bright studio lighting</div>
+    <img src="output8_files/image_1073.webp">
+    <img src="output8_files/image_659.webp">
+    <img src="output8_files/image_703.webp">
+    <img src="output8_files/image_152.webp">
+    
+    
+    <div>A cyan flower inside a coffee mug, bright studio lighting</div>
+    <img src="output8_files/image_696.webp">
+    <img src="output8_files/image_1336.webp">
+    <img src="output8_files/image_038.webp">
+    <img src="output8_files/image_163.webp" class="selected">
+    
+    <h2>[woman drinking]</h2>
+    <div>A woman drinking a glass of juice, bright studio lighting</div>
+    <img src="output8_files/image_839.webp">
+    <img src="output8_files/image_602.webp">
+    <img src="output8_files/image_366.webp">
+    <img src="output8_files/image_035.webp">
+    
+    
+    <div>Closeup of a woman drinking a glass of juice, bright studio lighting</div>
+    <img src="output8_files/image_546.webp">
+    <img src="output8_files/image_110.webp">
+    <img src="output8_files/image_1119.webp">
+    <img src="output8_files/image_707.webp">
+    
+    
+    <div>Closeup of a woman drinking from a glass, stock photograph</div>
+    <img src="output8_files/image_1502.webp">
+    <img src="output8_files/image_704.webp">
+    <img src="output8_files/image_1263.webp">
+    <img src="output8_files/image_1175.webp" class="selected">
+    
+    <h2>[woman eating]</h2>
+    <div>Closeup of an ice-cream being eaten by a woman, stock photograph</div>
+    <img src="output8_files/image_543.webp">
+    <img src="output8_files/image_1128.webp" class="selected">
+    <img src="output8_files/image_1077.webp">
+    <img src="output8_files/image_142.webp">
+    
+    <h2>[dog sitting on table]</h2>
+    <div>Wide shot of a dog sitting on top of a wooden table</div>
+    <img src="output8_files/image_1572.webp">
+    <img src="output8_files/image_1389.webp">
+    <img src="output8_files/image_591.webp">
+    <img src="output8_files/image_465.webp" class="selected">
+    
+    <h2>[dog sitting beneath table]</h2>
+    <div>Wide shot of a dog sitting beneath a table</div>
+    <img src="output8_files/image_768.webp">
+    <img src="output8_files/image_945.webp">
+    <img src="output8_files/image_380.webp">
+    <img src="output8_files/image_658.webp">
+    
+    
+    <div>Wide shot of a dog sitting under a table</div>
+    <img src="output8_files/image_1350.webp">
+    <img src="output8_files/image_1597.webp">
+    <img src="output8_files/image_105.webp">
+    <img src="output8_files/image_1236.webp" class="selected">
+    
+    <h2>[dancer chasing policeman]</h2>
+    <div>A ballerina chasing a policeman, high speed shutter</div>
+    <img src="output8_files/image_674.webp">
+    <img src="output8_files/image_711.webp">
+    <img src="output8_files/image_1370.webp">
+    <img src="output8_files/image_1391.webp">
+    
+    
+    <div>A ballerina runs behind a policeman, high speed shutter</div>
+    <img src="output8_files/image_578.webp">
+    <img src="output8_files/image_1012.webp" class="selected">
+    <img src="output8_files/image_529.webp">
+    <img src="output8_files/image_477.webp">
+    
+    
+    <div>An angry ballerina runs behind a smiling policeman, high speed shutter</div>
+    <img src="output8_files/image_1152.webp">
+    <img src="output8_files/image_243.webp">
+    <img src="output8_files/image_773.webp">
+    <img src="output8_files/image_487.webp">
+    
+    
+    <div>An ballerina runs after a policeman, high speed shutter</div>
+    <img src="output8_files/image_1501.webp">
+    <img src="output8_files/image_081.webp">
+    <img src="output8_files/image_1488.webp">
+    <img src="output8_files/image_1326.webp">
+    
+    
+    <div>A ballerina runs after a policeman, stock photograph</div>
+    <img src="output8_files/image_682.webp">
+    <img src="output8_files/image_557.webp">
+    <img src="output8_files/image_541.webp">
+    <img src="output8_files/image_1555.webp">
+    
+    
+    <div>A ballerina runs behind a policeman, stock photograph</div>
+    <img src="output8_files/image_999.webp">
+    <img src="output8_files/image_741.webp">
+    <img src="output8_files/image_1613.webp">
+    <img src="output8_files/image_761.webp">
+    
+    <h2>[cup on green flower]</h2>
+    <div>A mug sits on a green flower</div>
+    <img src="output8_files/image_521.webp">
+    <img src="output8_files/image_085.webp">
+    <img src="output8_files/image_570.webp">
+    <img src="output8_files/image_815.webp">
+    
+    
+    <div>A mug sits on a green gerbera</div>
+    <img src="output8_files/image_074.webp">
+    <img src="output8_files/image_248.webp">
+    <img src="output8_files/image_882.webp">
+    <img src="output8_files/image_1531.webp">
+    
+    
+    <div>A mug sits on a green gerbera, airbrush</div>
+    <img src="output8_files/image_769.webp">
+    <img src="output8_files/image_1034.webp">
+    <img src="output8_files/image_089.webp">
+    <img src="output8_files/image_1158.webp">
+    
+    
+    <div>A mug sits on the stem of a green gerbera, airbrush</div>
+    <img src="output8_files/image_116.webp">
+    <img src="output8_files/image_1093.webp">
+    <img src="output8_files/image_1021.webp">
+    <img src="output8_files/image_626.webp">
+    
+    
+    <div>A green gerbera under a mug, digital art</div>
+    <img src="output8_files/image_1547.webp">
+    <img src="output8_files/image_232.webp">
+    <img src="output8_files/image_1055.webp">
+    <img src="output8_files/image_1174.webp">
+    
+    
+    <div>A green gerbera squashed beneath a mug, digital art</div>
+    <img src="output8_files/image_898.webp">
+    <img src="output8_files/image_690.webp">
+    <img src="output8_files/image_616.webp">
+    <img src="output8_files/image_1526.webp">
+    
+    <h2>[man standing]</h2>
+    <div>Wide shot of a man standing, white studio background</div>
+    <img src="output8_files/image_1198.webp">
+    <img src="output8_files/image_1342.webp" class="selected">
+    <img src="output8_files/image_183.webp">
+    <img src="output8_files/image_534.webp">
+    
+    <h2>[shoe on green pencil]</h2>
+    <div>A shoe standing on a green pencil</div>
+    <img src="output8_files/image_1214.webp">
+    <img src="output8_files/image_584.webp">
+    <img src="output8_files/image_922.webp">
+    <img src="output8_files/image_567.webp">
+    
+    
+    <div>A shoe stepping on a green pencil</div>
+    <img src="output8_files/image_767.webp">
+    <img src="output8_files/image_328.webp">
+    <img src="output8_files/image_934.webp">
+    <img src="output8_files/image_009.webp">
+    
+    
+    <div>A brown shoe stepping on a green pencil</div>
+    <img src="output8_files/image_533.webp" class="selected">
+    <img src="output8_files/image_592.webp">
+    <img src="output8_files/image_345.webp">
+    <img src="output8_files/image_026.webp">
+    
+    <h2>[policeman chasing dancer]</h2>
+    <div>a policeman running after a ballerina, high speed shutter</div>
+    <img src="output8_files/image_1318.webp">
+    <img src="output8_files/image_531.webp">
+    <img src="output8_files/image_1554.webp">
+    <img src="output8_files/image_170.webp">
+    
+    
+    <div>a policeman running behind a ballerina, high speed shutter</div>
+    
+    <img src="output8_files/image_382.webp">
+    <img src="output8_files/image_932.webp">
+    <img src="output8_files/image_813.webp">
+    <img src="output8_files/image_635.webp" class="selected">
+    
+    
+    <div>a ballerina running away from a policeman, high speed shutter</div>
+    <img src="output8_files/image_931.webp">
+    <img src="output8_files/image_1165.webp">
+    <img src="output8_files/image_928.webp">
+    <img src="output8_files/image_1221.webp">
+    
+    
+    <div>a policeman chases a ballerina</div>
+    <img src="output8_files/image_112.webp">
+    <img src="output8_files/image_1133.webp">
+    <img src="output8_files/image_544.webp">
+    <img src="output8_files/image_1551.webp">
+    
+    
+    <div>a policeman runs behind a ballerina</div>
+    <img src="output8_files/image_374.webp">
+    <img src="output8_files/image_1466.webp">
+    <img src="output8_files/image_808.webp">
+    <img src="output8_files/image_147.webp">
+    
+    <h2>[man walking]</h2>
+    <div>A man walks down the street, daylight, wide shot</div>
+    <img src="output8_files/image_230.webp">
+    <img src="output8_files/image_1286.webp">
+    <img src="output8_files/image_042.webp">
+    <img src="output8_files/image_448.webp" class="selected">
+    
+    <h2>[woman walking]</h2>
+    <div>A woman walks down the street, daylight, wide shot</div>
+    <img src="output8_files/image_862.webp">
+    <img src="output8_files/image_041.webp">
+    <img src="output8_files/image_1212.webp">
+    <img src="output8_files/image_849.webp">
+    
+    
+    <div>A woman walks, daylight, wide shot</div>
+    <img src="output8_files/image_1570.webp">
+    <img src="output8_files/image_906.webp">
+    <img src="output8_files/image_1630.webp" class="selected">
+    <img src="output8_files/image_1063.webp">
+    
+    
+    <div>A woman walks, stock photograph</div>
+    <img src="output8_files/image_1583.webp">
+    <img src="output8_files/image_342.webp">
+    <img src="output8_files/image_296.webp">
+    <img src="output8_files/image_1222.webp">
+    
+    <h2>[man eating ice-cream]</h2>
+    <div>Closeup of an ice-cream being eaten by a man, stock photograph</div>
+    <img src="output8_files/image_419.webp">
+    <img src="output8_files/image_1407.webp" class="selected">
+    <img src="output8_files/image_010.webp">
+    <img src="output8_files/image_926.webp">
+    
+    <h2>[female crying]</h2>
+    <div>Closeup of a girl crying, bright studio lighting, stock photography</div>
+    <img src="output8_files/image_058.webp">
+    <img src="output8_files/image_449.webp">
+    <img src="output8_files/image_491.webp">
+    <img src="output8_files/image_726.webp">
+    
+    
+    <div>A girl crying, bright studio lighting, stock photography, head and shoulders shot</div>
+    <img src="output8_files/image_320.webp">
+    <img src="output8_files/image_523.webp">
+    <img src="output8_files/image_175.webp">
+    <img src="output8_files/image_472.webp" class="selected">
+    
+    <h2>[cat on red carpet]</h2>
+    <div>A cat lies on a red carpet, indoor lighting</div>
+    <img src="output8_files/image_1002.webp">
+    <img src="output8_files/image_1151.webp">
+    <img src="output8_files/image_229.webp">
+    <img src="output8_files/image_1017.webp">
+    
+    
+    <div>Mid shot of a cat lying on a red carpet, indoor lighting</div>
+    <img src="output8_files/image_1157.webp">
+    <img src="output8_files/image_450.webp" class="selected">
+    <img src="output8_files/image_876.webp">
+    <img src="output8_files/image_494.webp">
+    
+    <h2>[man eating apple]</h2>
+    <div>Closeup of a man eating an apple, stock photograph</div>
+    <img src="output8_files/image_986.webp">
+    <img src="output8_files/image_505.webp">
+    <img src="output8_files/image_1148.webp">
+    <img src="output8_files/image_1542.webp">
+    
+    
+    <div>Closeup of a man eating an apple, stock photograph, high detail</div>
+    <img src="output8_files/image_398.webp">
+    <img src="output8_files/image_488.webp">
+    <img src="output8_files/image_871.webp">
+    <img src="output8_files/image_1202.webp">
+    
+    
+    <div>a man eating an apple, stock photograph, high detail</div>
+    <img src="output8_files/image_661.webp">
+    <img src="output8_files/image_575.webp">
+    <img src="output8_files/image_1044.webp">
+    <img src="output8_files/image_108.webp">
+    
+    
+    <div>a man biting an apple, stock photograph</div>
+    <img src="output8_files/image_611.webp">
+    <img src="output8_files/image_1107.webp">
+    <img src="output8_files/image_1098.webp">
+    <img src="output8_files/image_397.webp" class="selected">
+    
+    <h2>[paper on pen]</h2>
+    <div>A notepad on a desk, with a pen half hidden underneath it</div>
+    <img src="output8_files/image_803.webp">
+    <img src="output8_files/image_389.webp">
+    <img src="output8_files/image_1155.webp">
+    <img src="output8_files/image_609.webp">
+    
+    
+    <div>A pen underneath a ream of paper</div>
+    <img src="output8_files/image_1225.webp">
+    <img src="output8_files/image_086.webp">
+    <img src="output8_files/image_1241.webp">
+    <img src="output8_files/image_1392.webp">
+    
+    
+    <div>A piece of paper laid over a pen</div>
+    <img src="output8_files/image_103.webp">
+    <img src="output8_files/image_255.webp">
+    <img src="output8_files/image_1218.webp">
+    <img src="output8_files/image_415.webp">
+    
+    
+    <div>Paper on a desk. A pen is half hidden beneath the paper.</div>
+    <img src="output8_files/image_630.webp">
+    <img src="output8_files/image_1368.webp">
+    <img src="output8_files/image_199.webp">
+    <img src="output8_files/image_948.webp">
+    
+    
+    <div>Paper on a desk. Half of a pen is visible beneath the paper.</div>
+    <img src="output8_files/image_239.webp">
+    <img src="output8_files/image_515.webp">
+    <img src="output8_files/image_901.webp">
+    <img src="output8_files/image_937.webp">
+    
+    
+    <div>Paper laid over a pen.</div>
+    <img src="output8_files/image_1322.webp">
+    <img src="output8_files/image_336.webp">
+    <img src="output8_files/image_1220.webp">
+    <img src="output8_files/image_989.webp">
+    
+    <h2>[flower in a blue cup]</h2>
+    <div>A flower inside a blue mug, studio lighting</div>
+    
+    <img src="output8_files/image_1153.webp">
+    <img src="output8_files/image_263.webp" class="selected">
+    <img src="output8_files/image_553.webp">
+    <img src="output8_files/image_024.webp">
+    
+    <h2>[woman standing]</h2>
+    <div>Full body shot of a woman standing, white studio background.</div>
+    
+    <img src="output8_files/image_1139.webp">
+    <img src="output8_files/image_962.webp">
+    <img src="output8_files/image_1523.webp">
+    <img src="output8_files/image_349.webp" class="selected">
+    
+    <h2>[boy sitting on table]</h2>
+    <div>A smiling boy sits on a table, stock photograph</div>
+    
+    <img src="output8_files/image_1541.webp">
+    <img src="output8_files/image_885.webp">
+    <img src="output8_files/image_777.webp">
+    <img src="output8_files/image_1301.webp">
+    
+    
+    <div>A smiling boy sits on top of a table, stock photograph, wide shot</div>
+    <img src="output8_files/image_306.webp">
+    <img src="output8_files/image_672.webp">
+    <img src="output8_files/image_1248.webp">
+    <img src="output8_files/image_414.webp">
+    
+    
+    <div>A smiling boy sits on top of a table, stock photograph, wide shot, shot from behind</div>
+    <img src="output8_files/image_1092.webp">
+    <img src="output8_files/image_489.webp">
+    <img src="output8_files/image_158.webp">
+    <img src="output8_files/image_1532.webp" class="selected">
+    
+    
+    <div>A boy sits on top of a table, stock photograph, wide shot, shot from behind</div>
+    <img src="output8_files/image_729.webp">
+    <img src="output8_files/image_1296.webp">
+    <img src="output8_files/image_082.webp">
+    <img src="output8_files/image_1455.webp">
+    
+    
+    <div>A smiling boy sits on top of a table, stock photograph, wide shot</div>
+    <img src="output8_files/image_631.webp">
+    <img src="output8_files/image_070.webp">
+    <img src="output8_files/image_588.webp">
+    <img src="output8_files/image_1176.webp">
+    
+    
+    <div>A boy sits on top of a table, stock photograph, shot from the side</div>
+    <img src="output8_files/image_1433.webp">
+    <img src="output8_files/image_1200.webp">
+    <img src="output8_files/image_1521.webp">
+    <img src="output8_files/image_1226.webp">
+    
+    <h2>[singer hitting a soldier]</h2>
+    <div>A singer hits a soldier with a microphone</div>
+    <img src="output8_files/image_1131.webp">
+    <img src="output8_files/image_1332.webp">
+    <img src="output8_files/image_376.webp">
+    <img src="output8_files/image_725.webp">
+    
+    
+    <div>A solider standing to attention. A man taps his shoulder with a microphone.</div>
+    <img src="output8_files/image_457.webp">
+    <img src="output8_files/image_941.webp">
+    <img src="output8_files/image_253.webp">
+    <img src="output8_files/image_824.webp">
+    
+    
+    <div>A singer taps a soldier with his microphone</div>
+    <img src="output8_files/image_1033.webp" class="selected">
+    <img src="output8_files/image_106.webp">
+    <img src="output8_files/image_048.webp">
+    <img src="output8_files/image_1169.webp">
+    
+    
+    <div>A singer taps a soldier with his microphone, photograph</div>
+    <img src="output8_files/image_251.webp">
+    <img src="output8_files/image_298.webp">
+    <img src="output8_files/image_537.webp">
+    <img src="output8_files/image_916.webp">
+    
+    
+    <div>A singer hits a soldier with his microphone</div>
+    <img src="output8_files/image_473.webp">
+    <img src="output8_files/image_1196.webp">
+    <img src="output8_files/image_1013.webp">
+    <img src="output8_files/image_608.webp">
+    
+    
+    <div>A singer knocks a soldier with his microphone</div>
+    <img src="output8_files/image_1282.webp">
+    <img src="output8_files/image_881.webp">
+    <img src="output8_files/image_454.webp">
+    <img src="output8_files/image_1183.webp">
+    
+    <h2>[policeman painting dancer]</h2>
+    <div>A ballerina poses while a policeman paints her portrait</div>
+    <img src="output8_files/image_953.webp">
+    <img src="output8_files/image_249.webp">
+    <img src="output8_files/image_430.webp">
+    <img src="output8_files/image_1349.webp">
+    
+    
+    <div>A ballerina poses while a policeman paints her portrait on a canvas in oils, stock photograph</div>
+    <img src="output8_files/image_092.webp">
+    <img src="output8_files/image_1091.webp">
+    <img src="output8_files/image_1041.webp">
+    <img src="output8_files/image_678.webp">
+    
+    
+    <div>A policeman paints a ballerina on a canvas, stock photograph</div>
+    <img src="output8_files/image_1454.webp">
+    <img src="output8_files/image_594.webp">
+    <img src="output8_files/image_240.webp" class="selected">
+    <img src="output8_files/image_1264.webp">
+    
+    <h2>[man painting a picture]</h2>
+    <div>A man paints a picture on a canvas, stock photograph</div>
+    <img src="output8_files/image_1435.webp">
+    <img src="output8_files/image_1142.webp">
+    <img src="output8_files/image_1181.webp">
+    <img src="output8_files/image_869.webp" class="selected">
+    
+    <h2>[mug on blue flower]</h2>
+    <div>A blue gerbera squashed beneath a mug, digital art</div>
+    <img src="output8_files/image_1544.webp">
+    <img src="output8_files/image_705.webp">
+    <img src="output8_files/image_763.webp">
+    <img src="output8_files/image_643.webp">
+    
+    
+    <div>A mug sits on top of a blue gerbera</div>
+    <img src="output8_files/image_550.webp">
+    <img src="output8_files/image_214.webp">
+    <img src="output8_files/image_633.webp">
+    <img src="output8_files/image_119.webp">
+    
+    
+    <div>A mug resting on top of a blue gerbera</div>
+    <img src="output8_files/image_1144.webp">
+    <img src="output8_files/image_939.webp">
+    <img src="output8_files/image_1437.webp">
+    <img src="output8_files/image_171.webp">
+    
+    
+    <div>A white mug resting on top of a blue gerbera</div>
+    <img src="output8_files/image_1417.webp">
+    <img src="output8_files/image_1314.webp">
+    <img src="output8_files/image_135.webp">
+    <img src="output8_files/image_1047.webp">
+    
+    
+    <div>A white mug sits on top of a blue flower</div>
+    <img src="output8_files/image_401.webp">
+    <img src="output8_files/image_1216.webp">
+    <img src="output8_files/image_1309.webp">
+    <img src="output8_files/image_858.webp">
+    
+    
+    <div>A white mug sits on top of a blue gerbera, airbrush artwork</div>
+    
+    <img src="output8_files/image_892.webp">
+    <img src="output8_files/image_1125.webp">
+    <img src="output8_files/image_427.webp">
+    <img src="output8_files/image_512.webp">
+    
+    <h2>[soldier photographing singer]</h2>
+    <div>A soldier taking a photograph of a singer on stage</div>
+    <img src="output8_files/image_244.webp">
+    <img src="output8_files/image_935.webp">
+    <img src="output8_files/image_1244.webp">
+    <img src="output8_files/image_904.webp">
+    
+    
+    <div>A soldier takes a photograph of a singer in concert</div>
+    <img src="output8_files/image_022.webp">
+    <img src="output8_files/image_039.webp">
+    <img src="output8_files/image_1499.webp">
+    <img src="output8_files/image_066.webp">
+    
+    
+    <div>A soldier photographs a singer, news photograph</div>
+    <img src="output8_files/image_1146.webp">
+    <img src="output8_files/image_002.webp">
+    <img src="output8_files/image_1027.webp">
+    <img src="output8_files/image_802.webp">
+    
+    
+    <div>A soldier photographs a singer at a concert, news photograph</div>
+    <img src="output8_files/image_583.webp">
+    <img src="output8_files/image_351.webp">
+    <img src="output8_files/image_395.webp">
+    <img src="output8_files/image_1546.webp">
+    
+    
+    <div>A soldier photographs a singer, clipart</div>
+    <img src="output8_files/image_225.webp">
+    <img src="output8_files/image_394.webp">
+    <img src="output8_files/image_975.webp">
+    <img src="output8_files/image_879.webp">
+    
+    
+    <div>A soldier photographs a singer, comic book art</div>
+    
+    <img src="output8_files/image_965.webp">
+    <img src="output8_files/image_338.webp">
+    <img src="output8_files/image_978.webp">
+    <img src="output8_files/image_304.webp">
+    
+    <h2>[shoe on apple]</h2>
+    <div>A leather shoe on top of an apple, stock photography</div>
+    <img src="output8_files/image_1533.webp">
+    <img src="output8_files/image_952.webp">
+    <img src="output8_files/image_873.webp">
+    <img src="output8_files/image_184.webp">
+    
+    
+    <div>A leather shoe standing on an apple, stock photography</div>
+    <img src="output8_files/image_348.webp">
+    <img src="output8_files/image_910.webp">
+    <img src="output8_files/image_857.webp">
+    <img src="output8_files/image_1096.webp">
+    
+    
+    <div>An apple underneath a leather shoe, stock photography</div>
+    <img src="output8_files/image_137.webp">
+    <img src="output8_files/image_1552.webp">
+    <img src="output8_files/image_443.webp">
+    <img src="output8_files/image_1432.webp">
+    
+    
+    <div>Closeup of a shoe standing on top of an apple, stock photograph</div>
+    <img src="output8_files/image_054.webp">
+    <img src="output8_files/image_447.webp">
+    <img src="output8_files/image_874.webp">
+    <img src="output8_files/image_1456.webp">
+    
+    
+    <div>Closeup of a shoed foot standing on an apple, stock photograph</div>
+    <img src="output8_files/image_003.webp">
+    <img src="output8_files/image_262.webp">
+    <img src="output8_files/image_173.webp">
+    <img src="output8_files/image_1020.webp">
+    
+    
+    <div>Closeup of a shoe squashing an apple, stock photograph</div>
+    <img src="output8_files/image_806.webp">
+    <img src="output8_files/image_453.webp" class="selected">
+    <img src="output8_files/image_821.webp">
+    <img src="output8_files/image_717.webp">
+    
+    <h2>[shoe on blue pencil]</h2>
+    <div>Closeup of a shoe standing on a blue pencil, stock photograph</div>
+    <img src="output8_files/image_339.webp">
+    <img src="output8_files/image_983.webp">
+    <img src="output8_files/image_950.webp">
+    <img src="output8_files/image_918.webp">
+    
+    
+    <div>Closeup of a shoe stepping on a blue pencil, stock photograph</div>
+    <img src="output8_files/image_1377.webp">
+    <img src="output8_files/image_1328.webp">
+    <img src="output8_files/image_046.webp">
+    <img src="output8_files/image_652.webp">
+    
+    
+    <div>Closeup of a leather shoe stepping on a blue pencil, stock photograph</div>
+    <img src="output8_files/image_798.webp">
+    <img src="output8_files/image_951.webp">
+    <img src="output8_files/image_1594.webp">
+    <img src="output8_files/image_750.webp">
+    
+    
+    <div>Wide shot of a leather shoe stepping on a blue pencil, stock photograph</div>
+    <img src="output8_files/image_012.webp">
+    <img src="output8_files/image_637.webp">
+    <img src="output8_files/image_466.webp">
+    <img src="output8_files/image_481.webp">
+    
+    
+    <div>Wide shot of a leather shoe resting on a blue pencil, stock photograph</div>
+    <img src="output8_files/image_1143.webp">
+    <img src="output8_files/image_182.webp">
+    <img src="output8_files/image_346.webp">
+    <img src="output8_files/image_068.webp">
+    
+    
+    <div>Wide shot of a leather shoe resting on a blue pencil, digital art</div>
+    <img src="output8_files/image_1084.webp">
+    <img src="output8_files/image_011.webp">
+    <img src="output8_files/image_084.webp" class="selected">
+    <img src="output8_files/image_1345.webp">
+    
+    <h2>[penicl on blue shoe]</h2>
+    <div>A pencil on a blue shoe, stock photography</div>
+    <img src="output8_files/image_1173.webp">
+    <img src="output8_files/image_234.webp">
+    <img src="output8_files/image_1344.webp">
+    <img src="output8_files/image_1204.webp" class="selected">
+    
+    <h2>[woman sitting]</h2>
+    <div>A woman sitting in a chair, white studio background, profile shot</div>
+    <img src="output8_files/image_847.webp">
+    <img src="output8_files/image_1154.webp" class="selected">
+    <img src="output8_files/image_1231.webp">
+    <img src="output8_files/image_1000.webp">
+    
+    <h2>[dancer painting policeman]</h2>
+    <div>A ballerina paints a policeman on canvas, stock photograph</div>
+    <img src="output8_files/image_095.webp">
+    <img src="output8_files/image_1359.webp">
+    <img src="output8_files/image_1094.webp">
+    <img src="output8_files/image_1213.webp">
+    
+    
+    <div>A ballerina painting a policeman on canvas, stock photograph</div>
+    <img src="output8_files/image_1545.webp">
+    <img src="output8_files/image_1411.webp">
+    <img src="output8_files/image_1127.webp">
+    <img src="output8_files/image_1415.webp">
+    
+    
+    <div>A ballerina painting a portrait of a policeman, stock photograph</div>
+    <img src="output8_files/image_880.webp">
+    <img src="output8_files/image_781.webp">
+    <img src="output8_files/image_091.webp">
+    <img src="output8_files/image_1207.webp">
+    
+    
+    <div>A ballerina painting a portrait of a policeman</div>
+    <img src="output8_files/image_689.webp">
+    <img src="output8_files/image_1049.webp">
+    <img src="output8_files/image_1510.webp">
+    <img src="output8_files/image_1329.webp">
+    
+    
+    <div>A ballerina painting a policeman</div>
+    <img src="output8_files/image_603.webp">
+    <img src="output8_files/image_233.webp">
+    <img src="output8_files/image_1150.webp">
+    <img src="output8_files/image_418.webp">
+    
+    
+    <div>A ballerina painting a policeman</div>
+    <img src="output8_files/image_1097.webp">
+    <img src="output8_files/image_712.webp">
+    <img src="output8_files/image_359.webp">
+    <img src="output8_files/image_1268.webp">
+    
+    <h2>[red pencil on shoe]</h2>
+    <div>A red pencil sits on a leather shoe, studio lighting</div>
+    <img src="output8_files/image_459.webp" class="selected">
+    <img src="output8_files/image_765.webp">
+    <img src="output8_files/image_1086.webp">
+    <img src="output8_files/image_938.webp">
+    
+    <h2>[pen on paper]</h2>
+    <div>A pen sits on a ream of paper, afternoon lighting</div>
+    <img src="output8_files/image_964.webp">
+    <img src="output8_files/image_1548.webp">
+    <img src="output8_files/image_758.webp">
+    <img src="output8_files/image_851.webp">
+    
+    
+    <div>A pen sits on a stack of paper, afternoon lighting</div>
+    <img src="output8_files/image_571.webp">
+    <img src="output8_files/image_829.webp">
+    <img src="output8_files/image_944.webp">
+    <img src="output8_files/image_216.webp">
+    
+    
+    <div>A pen sits on a thick notepad, studio lighting</div>
+    <img src="output8_files/image_235.webp">
+    <img src="output8_files/image_1404.webp">
+    <img src="output8_files/image_552.webp" class="selected">
+    <img src="output8_files/image_891.webp">
+    
+    <h2>[woman painting picture]</h2>
+    <div>A woman paints a picture on a canvas, stock photograph</div>
+    <img src="output8_files/image_956.webp">
+    <img src="output8_files/image_1089.webp">
+    <img src="output8_files/image_1337.webp">
+    <img src="output8_files/image_581.webp" class="selected">
+    
+    <h2>[male laughing]</h2>
+    <div>A man laughing happily, stock photograph</div>
+    <img src="output8_files/image_166.webp" class="selected">
+    <img src="output8_files/image_1363.webp">
+    <img src="output8_files/image_107.webp">
+    <img src="output8_files/image_1145.webp">
+    
+    <h2>[man painting a wall]</h2>
+    <div>A painter paints a wall with a roller, bright indoor lighting</div>
+    <img src="output8_files/image_284.webp">
+    <img src="output8_files/image_1518.webp">
+    <img src="output8_files/image_727.webp">
+    <img src="output8_files/image_624.webp">
+    
+    
+    <div>A painter paints a wall with a roller, bright indoor lighting, hight detail</div>
+    <img src="output8_files/image_1192.webp">
+    <img src="output8_files/image_1428.webp">
+    <img src="output8_files/image_1476.webp" class="selected">
+    <img src="output8_files/image_908.webp">
+</div>
+
+
+<div>
+</div>
+</div>
+    <script>
+
+
+
+  function goToHeading() {
+    const headingSelector = document.getElementById('headingSelector');
+    const selectedIndex = headingSelector.value;
+    const [sectionIndex, h2Index] = selectedIndex.split('-'); // Split the value into section and h2 indices
+    const sections = document.querySelectorAll('#parent > div'); // Get all direct child div elements of the parent
+    const selectedSection = sections[sectionIndex]; // Get the selected section div
+    const headingsInSection = selectedSection.querySelectorAll('h2'); // Get all h2 elements within the selected section
+    const selectedHeading = headingsInSection[h2Index]; // Get the selected h2 heading
+
+    if (selectedHeading) {
+      selectedHeading.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+  document.getElementById('headingSelector').addEventListener('change', goToHeading);
+
+
+
+        var labels = [{"label": "lock", "attempts":5},
+{"label": "is giving", "attempts":1},
+{"label": "sank", "attempts":1},
+{"label": "work", "attempts":1},
+{"label": "change [an appointment]", "attempts":4},
+{"label": "beg", "attempts":1},
+{"label": "rise", "attempts":1},
+{"label": "spend", "attempts":4},
+{"label": "eat", "attempts":1},
+{"label": "hibernate", "attempts":1},
+{"label": "dig", "attempts":1},
+{"label": "indicate", "attempts":6},
+{"label": "play records", "attempts":4},
+{"label": "ring", "attempts":1},
+{"label": "resign", "attempts":1},
+{"label": "go", "attempts":1},
+{"label": "massaging", "attempts":2},
+{"label": "steer", "attempts":3},
+{"label": "jump", "attempts":2},
+{"label": "catch it", "attempts":3},
+{"label": "carrying", "attempts":2},
+{"label": "get out", "attempts":2},
+{"label": "draw", "attempts":1},
+{"label": "slurp", "attempts":2},
+{"label": "push", "attempts":5},
+{"label": "overheat", "attempts":1},
+{"label": "pay it", "attempts":4},
+{"label": "drink", "attempts":1},
+{"label": "turn it down", "attempts":2},
+{"label": "smell", "attempts":1},
+{"label": "knocked out", "attempts":3},
+{"label": "hang up", "attempts":4},
+{"label": "book [a reservation]", "attempts":1},
+{"label": "come", "attempts":6},
+{"label": "drive", "attempts":1},
+{"label": "sit", "attempts":6},
+{"label": "leap", "attempts":1},
+{"label": "apologise", "attempts":1},
+{"label": "pull", "attempts":2},
+{"label": "lift", "attempts":1},
+{"label": "pants", "attempts":1},
+{"label": "meeting", "attempts":2},
+{"label": "schnitzel", "attempts":1},
+{"label": "bell", "attempts":1},
+{"label": "restaurant", "attempts":1},
+{"label": "juice", "attempts":1},
+{"label": "earwig", "attempts":1},
+{"label": "house", "attempts":1},
+{"label": "chicken", "attempts":1},
+{"label": "sugarcane", "attempts":2},
+{"label": "hospital", "attempts":1},
+{"label": "ambulance", "attempts":1},
+{"label": "croquet", "attempts":6},
+{"label": "squiggle", "attempts":1},
+{"label": "cucumber", "attempts":1},
+{"label": "flowers", "attempts":1},
+{"label": "bag", "attempts":1},
+{"label": "trumpet", "attempts":1},
+{"label": "camera", "attempts":1},
+{"label": "soil", "attempts":3},
+{"label": "hairspray", "attempts":2},
+{"label": "dinghy", "attempts":1},
+{"label": "molecule", "attempts":2},
+{"label": "plant", "attempts":1},
+{"label": "letter", "attempts":2},
+{"label": "surgery", "attempts":2},
+{"label": "present", "attempts":1},
+{"label": "chips", "attempts":1},
+{"label": "saxophone", "attempts":3},
+{"label": "lattice", "attempts":3},
+{"label": "tuft", "attempts":1},
+{"label": "brim", "attempts":2},
+{"label": "jacket", "attempts":1},
+{"label": "spacesuit", "attempts":1},
+{"label": "wallet", "attempts":1},
+{"label": "pipe", "attempts":3},
+{"label": "armrests", "attempts":1},
+{"label": "origami", "attempts":1},
+{"label": "clipboard", "attempts":1},
+{"label": "bike", "attempts":1},
+{"label": "saluting [soldiers do this]", "attempts":1},
+{"label": "conducting (directing)[heisinfrontofanorchestra]", "attempts":2},
+{"label": "bowling [his fingers are in the ball]", "attempts":1},
+{"label": "knitting [using yarn]", "attempts":2},
+{"label": "swimming [you do it in a pool]", "attempts":2},
+{"label": "dripping [that is a faucet]", "attempts":1},
+{"label": "boxing (fighting) [a sport using gloves]", "attempts":1},
+{"label": "curtysing (courtesying) [girls do this]", "attempts":6},
+{"label": "smoking [you do it with a cigarette]", "attempts":1},
+{"label": "proposing [having to do with marriage]", "attempts":2},
+{"label": "throwing (pitching) [baseball players do this]", "attempts":1},
+{"label": "shaking (greeting) [you do this when you meet someone]", "attempts":1},
+{"label": "running (jogging) [a way of exercising]", "attempts":1},
+{"label": "milking [doing something to a cow]", "attempts":6},
+{"label": "bowing [performers do this]", "attempts":6},
+{"label": "exercising [he is in a gym]", "attempts":1},
+{"label": "skiing [a sport done on snow]", "attempts":1},
+{"label": "surfing (surfboarding) [he is on waves]", "attempts":1},
+{"label": "cutting [you do it with scissors]", "attempts":5},
+{"label": "knighting (dubbing) [the queen does this]", "attempts":6},
+{"label": "sleeping [you do it at night]", "attempts":3},
+{"label": "floating [staying on top of the water]", "attempts":4},
+{"label": "reading", "attempts":1},
+{"label": "climbing [going up a mountain]", "attempts":1},
+{"label": "sawing [cutting a log in two]", "attempts":6},
+{"label": "sailing (boating) [the wind is moving that]", "attempts":1},
+{"label": "rowing [using oars to make a boat go]", "attempts":1},
+{"label": "diving [entering the water]", "attempts":6},
+{"label": "lassoing (roping) [cowboys do it]", "attempts":3},
+{"label": "pointing [you do it with your index finger]", "attempts":1},
+{"label": "pouring [filling up a glass]", "attempts":1},
+{"label": "kneeling [some people do this when they pray]", "attempts":2},
+{"label": "typing (typewriting) [secretaries do it]", "attempts":1},
+{"label": "ironing [youdothiswhenyourclothesarewrinkled]", "attempts":2},
+{"label": "sweeping [cleaning up the floor]", "attempts":3},
+{"label": "brushing [fixing hair]", "attempts":5},
+{"label": "crying [showing you are sad]", "attempts":1},
+{"label": "shoveling (digging) [makingaholeintheground]", "attempts":2},
+{"label": "fencing [sport using swords]", "attempts":2},
+{"label": "erupting (spewing) [that is a volcano]", "attempts":1},
+{"label": "microscope", "attempts":1},
+{"label": "rope", "attempts":1},
+{"label": "candle", "attempts":1},
+{"label": "waterfall", "attempts":1},
+{"label": "king", "attempts":3},
+{"label": "hat", "attempts":1},
+{"label": "crown", "attempts":1},
+{"label": "kite", "attempts":1},
+{"label": "pen", "attempts":3},
+{"label": "scissors", "attempts":1},
+{"label": "bone", "attempts":1},
+{"label": "fireman", "attempts":5},
+{"label": "glass", "attempts":1},
+{"label": "boot", "attempts":1},
+{"label": "dice", "attempts":1},
+{"label": "piano", "attempts":3},
+{"label": "closet", "attempts":3},
+{"label": "duck", "attempts":1},
+{"label": "garage", "attempts":1},
+{"label": "house", "attempts":1},
+{"label": "skull", "attempts":1},
+{"label": "cow", "attempts":2},
+{"label": "pear", "attempts":1},
+{"label": "cane", "attempts":2},
+{"label": "cat", "attempts":1},
+{"label": "fork", "attempts":1},
+{"label": "van", "attempts":1},
+{"label": "apple", "attempts":1},
+{"label": "dinosaur", "attempts":2},
+{"label": "hair", "attempts":1},
+{"label": "wig", "attempts":2},
+{"label": "lamp", "attempts":1},
+{"label": "binoculars", "attempts":1},
+{"label": "hand", "attempts":1},
+{"label": "knife", "attempts":2},
+{"label": "football", "attempts":1},
+{"label": "zipper", "attempts":2},
+{"label": "tractor", "attempts":2},
+{"label": "foot", "attempts":2},
+{"label": "tent", "attempts":1},
+{"label": "[nurse chasing butcher]", "attempts":6},
+{"label": "[singer photographing soldier]", "attempts":6},
+{"label": "[woman eating apple]", "attempts":1},
+{"label": "[male crying]", "attempts":6},
+{"label": "[man sitting]", "attempts":4},
+{"label": "[blue flower in cup]", "attempts":3},
+{"label": "[woman drinking]", "attempts":3},
+{"label": "[woman eating]", "attempts":1},
+{"label": "[dog sitting on table]", "attempts":1},
+{"label": "[dog sitting beneath table]", "attempts":2},
+{"label": "[dancer chasing policeman]", "attempts":6},
+{"label": "[cup on green flower]", "attempts":6},
+{"label": "[man standing]", "attempts":1},
+{"label": "[shoe on green pencil]", "attempts":3},
+{"label": "[policeman chasing dancer]", "attempts":5},
+{"label": "[man walking]", "attempts":1},
+{"label": "[woman walking]", "attempts":3},
+{"label": "[man eating ice-cream]", "attempts":1},
+{"label": "[female crying]", "attempts":2},
+{"label": "[cat on red carpet]", "attempts":2},
+{"label": "[man eating apple]", "attempts":4},
+{"label": "[paper on pen]", "attempts":6},
+{"label": "[flower in a blue cup]", "attempts":1},
+{"label": "[woman standing]", "attempts":1},
+{"label": "[boy sitting on table]", "attempts":6},
+{"label": "[singer hitting a soldier]", "attempts":6},
+{"label": "[policeman painting dancer]", "attempts":3},
+{"label": "[man painting a picture]", "attempts":1},
+{"label": "[mug on blue flower]", "attempts":6},
+{"label": "[soldier photographing singer]", "attempts":6},
+{"label": "[shoe on apple]", "attempts":6},
+{"label": "[shoe on blue pencil]", "attempts":6},
+{"label": "[penicl on blue shoe]", "attempts":1},
+{"label": "[woman sitting]", "attempts":1},
+{"label": "[dancer painting policeman]", "attempts":6},
+{"label": "[red pencil on shoe]", "attempts":1},
+{"label": "[pen on paper]", "attempts":3},
+{"label": "[woman painting picture]", "attempts":1},
+{"label": "[male laughing]", "attempts":1},
+{"label": "[man painting a wall]", "attempts":2},]
+        var texts = ["closeup of a hand turning a key in a heavy padlock, low angle, studio light", 
+"closeup of a hand locking a heavy padlock, studio light", 
+"closeup of a hand locking a door, daylight, stock photography", 
+"closeup of a hand turning a key to lock a door, daylight, stock photography", 
+"closeup of a hand turning a key in a door, daylight, stock photography", 
+"A smiling boy giving a brightly wrapped gift to a girl, Stock photography, studio light", 
+"Mid shot of a half sunken boat in a lake, daylight", 
+"Mid shot of a man working at an office desk, frowning as he types and reads a document. Stock photography", 
+"An adult books an appointment at a reception desk, photograph", 
+"Split screen telephone conversation between a receptionist and woman, stock photography", 
+"A woman speaks to a receptionist on the telephone, stock photography", 
+"A receptionist speaks on the phone while consulting a diary, photograph", 
+"A child begs on the street, daylight, photography", 
+"A row of houses is partially flooded by rising sea levels, news photograph", 
+"Money changing hands at the register, mid shot, stock photography", 
+"Paying cash at the register, mid shot, stock photography", 
+"Paying cash at the register of an expensive uptown store, mid shot, stock photography", 
+"Paying cash at the register of an expensive uptown store, stock photography", 
+"A smiling girl eats spaghetti, white studio background, stock image", 
+"A Brown Bear hibernates in a tree hollow, nature photography", 
+"digging a hole with a spade, mid shot, daylight", 
+"Closeup of a car indicator flashing orange before a turn, outdoors, daylight", 
+"Mid shot of a turn signal flashing orange, outdoors, daylight", 
+"Mid shot of a car's turn signal flashing orange at an intersection, outdoors, daylight", 
+"Closeup of a hand pushing the turn signal stalk in a car, stock photograph", 
+"Closeup of a driver's hand signalling a turn, car interior, stock photograph", 
+"Illuminated car turn signal", 
+"photograph of a family listening to the record player, wide shot, life magazine 1970", 
+"photograph of a family listening to the record player, wide shot with high detail, life magazine 1970", 
+"photograph of a family listening to the record player, wide shot with high detail, life magazine", 
+"photograph of a family listening to the record player, wide shot with high detail", 
+"Mid shot of a hand dinging a reception bell, studio lighting", 
+"A businesswoman holds her belongings in a cardboard box, quitting her job, stock photograph, indoor lighting", 
+"Traffic drives through a green light, outdoor photography, daylight", 
+"Wide shot of a massuse massaging her client's back, high key studio lighting", 
+"Wide shot of a physiotherapist massaging a client's back, high key studio lighting", 
+"first person photograph of hands turning a car's steering wheel, motion blur, daylight", 
+"first person photograph of hands turning a car's steering wheel, daylight", 
+"first person photograph of two hands turning a car's steering wheel, daylight", 
+"a smiling young boy jumping in the air, white background, studio lighting", 
+"a smiling young child jumping in the air, white background, studio lighting", 
+"A fielder successfully catches the ball, medium shot, telephoto lens", 
+"Catching a ball, stock photograph closeup", 
+"Catching a ball in cupped hands, stock photograph closeup", 
+"stock photography of a smiling woman carrying a box, studio lighting", 
+"stock photography of a smiling woman carrying a box while walking, studio lighting, wide shot", 
+"A man angrily sends the dog out of the house, pointing crossly out the door. Wide shot in natural lighting.", 
+"A man angrily sends the dog out of the house, pointing crossly out the door. Wide shot, indoors.", 
+"Close up of a crayon drawing a colorful picture on paper, bright studio lighting", 
+"A woman slurps from a mug, stock photography, studio lighting", 
+"A woman slurps from a mug, detailed stock photography, studio lighting", 
+"A child pushes another child, white background, stock photography, studio lighting", 
+"Pushing a child on a swing, mid shot, outdoor lighting", 
+"Pushing a child on a swing, wide shot, outdoor lighting", 
+"A mother pushes a child on a swing, wide shot, stock photography", 
+"Closeup of a finger pushing a green button, photograph", 
+"An overheated car, steam pouring from the engine. Wide shot, roadside, daylight.", 
+"Holding a bill stamped 'overdue' in red letters, bright studio lighting.", 
+"Holding an overdue water bill, bright studio lighting.", 
+"A bill that needs paying, closeup", 
+"A woman looks stressed as she reads an opened bill, stock photography", 
+"A man drinking from a cup, professional lighting", 
+"Closeup of a hand turning a volume knob, studio lighting", 
+"Closeup of a hand turning a volume knob anti-clockwise, studio lighting", 
+"Closeup of a nose smelling a flower, studio lighting, stock photograph", 
+"Middleweight boxer knocked out cold in round one, mid shot, sports photography", 
+"Total knockout of a boxer, mid shot", 
+"A boxer lies unconscious in the ring, wide shot", 
+"A hand hangs up a telephone, studio lighting", 
+"A hand hangs telephone on to the receiver, studio lighting", 
+"A woman hangs up a telephone on to the receiver, studio lighting, stock photography", 
+"A hand hangs up a telephone on to the receiver, studio lighting", 
+"A restaurant employee takes a phone call, checking the bookings diary, photograph", 
+"Party guests arrive at the front door, photograph taken from inside", 
+"Party guests arrive at the front door, over the shoulder shot, point of view shot", 
+"Party guests arrive, over the shoulder shot, stock photography", 
+"Party guests arrive, stock photography", 
+"A woman greets a couple at the front door, stock photograph", 
+"A woman greets guests at the front door, stock photograph", 
+"A woman drives a car, car interior, low angle medium shot, stock photograph", 
+"A smiling girl sits on a chair, white studio, stock photography", 
+"A smiling girl sits on a chair, plain background", 
+"An older man sits down on a wooden chair, plain background, studio lighting", 
+"An older man lowers himself on to a wooden chair, plain background, studio lighting", 
+"An older man lowers himself into an armchair, studio lighting", 
+"An older man lowers sits in an armchair, studio lighting", 
+"A silhouette leaps between two cliff edges, wide shot, fast shutter speed", 
+"Man apologising to his partner, studio lighting, stock photograph", 
+"A woman pulls determinedly on a tug-of-war rope, studio lighting, stock photograph", 
+"A woman pulls determinedly on a tug-of-war rope, long shot, studio lighting, stock photograph", 
+"A weightlifter lifts a heavy weight, sports photography, high detail", 
+"pair of brown trousers laid flat on a white background, stock photograph", 
+"a board meeting in progress, stock photography", 
+"wide shot of a board meeting in progress, stock photography", 
+"Chicken schnitzel closeup", 
+"A large bronze bell", 
+"wide shot of a restaurant, diners and wait staff visible", 
+"a glass of orange juice, studio lighting", 
+"earwig, natural lighting", 
+"A typical, suburban, two storey house, sunlight", 
+"Chicken on a white background, studio stock photograph, brightly lit", 
+"sugarcane, stock photograph", 
+"sugarcane stem with raw sugar, stock photograph", 
+"large city hospital, outdoor photograph, wide shot", 
+"ambulance with sirens, outdoor photograph, action shot", 
+"a croquet game on a green lawn, warm outdoor photograph, calm", 
+"a croquet set, warm outdoor photograph, calm", 
+"a croquet mallet and hoop, warm outdoor photograph, calm", 
+"a croquet mallet and hoop", 
+"croquet, stock photograph", 
+"croquet hoop, stock photograph", 
+" a brightly colored squiggle on paper, digital art", 
+"a whole green cucumber and slices, studio lighting", 
+"closeup of a varied flower bunch, bright colours, studio lighting", 
+"a canvas tote bag on a white background, studio lighting", 
+"a brass trumpet being played, studio stock photograph, high detail", 
+"a black SLR camera on a white background, well lit", 
+"closeup of dark, moist soil; shallow depth of field", 
+"closeup of dark, moist soil; shallow depth of field, studio lighting", 
+"closeup of dark, moist soil; bright natural lighting", 
+"can of hairspray on light backgdrop, studio lit stock photograph", 
+"can of hairspray on light background, studio lit, wide shot, stock photograph", 
+"a white inflatable dinghy", 
+"3D representation of a molecule", 
+"3D representation of a simple molecule, wide shot", 
+"photograph of a potted plant, brightly lit", 
+"Scan of an old handwritten letter, slightly yellowed paper", 
+"Full-page scan of an old handwritten letter, slightly yellowed paper", 
+"Surgeons in blue scrubs perform an operation, stock photograph", 
+"Surgeons in blue scrubs perform a surgery, stock photograph", 
+"A beautifully gift-wrapped present, studio light", 
+"Closeup of potato chips", 
+"Mid shot of a saxophone, high detail, studio lighting", 
+"Full photograph of a saxophone, high detail, studio lighting", 
+"Musician playing a saxophone, high detail, studio lighting", 
+"closeup of a wooden lattice, garden visible in background, shallow depth of field", 
+"wooden diamond-shaped lattice, blurred garden background", 
+"wooden diamond-shaped lattice, outdoor light", 
+"solitary tuft of grass grows in a rocky landscape, closeup", 
+"closeup of a hat brim", 
+"closeup of a hat brim, centred on the brim edge", 
+"a jacket laid out on a white background, studio lighting", 
+"an astronaut spacesuit in a museum, tourist's photograph", 
+"closeup of a fine leather wallet on a benchtop", 
+"a large, grey metal pipe runs through the desert", 
+"a large, grey metal pipe with bolted joins runs through the desert", 
+"a straight, metal pipe with bolted joins runs through the desert", 
+"closeup of an armrest on a comfy armchair", 
+"several examples of origami", 
+"an A4 clipboard, stock photograph", 
+"road bicycle, studio lighting", 
+"a soldier saluting, news photograph", 
+"conductor conducting an orchestra, black backdrop", 
+"conductor conducting an orchestra, shot from behind", 
+"a man bowling at a ten pin bowling alley, action shot", 
+"closeup of hands knitting, well lit", 
+"closeup of hands knitting using thick white knitting needles, well lit", 
+"a woman swimming in an olympic pool", 
+"a woman swimming in an olympic pool, action shot", 
+"closeup of a chrome tap dripping water, high reflection, studio lighting", 
+"two boxers in a boxing ring, sports photograph", 
+"a young girl curtsies before royalty, news photograph", 
+"a young girl curtsies in a dress, stock photography", 
+"a young girl curtsies, stock photography", 
+"a woman curtsies, stock photography", 
+"a woman curtsies before the queen, photograph", 
+"a girl curtsies her dress before the queen, photograph", 
+"a man smoking a cigarette, outdoor lighting", 
+"a man proposes to a woman on one knee, stock photograph, studio lighting", 
+"a man proposes to a smiling, happy woman on one knee, stock photograph, studio lighting", 
+"a pitcher pitches a baseball, sports photograph", 
+"closeup of hands shaking hands, studio lighting", 
+"a jogger running in a park, outdoor lighting", 
+"mid shot of a farmer milking a cow", 
+"closeup of hands milking a cow", 
+"closeup of hands milking a cow", 
+"milking a cow, stock photograph", 
+"a farmer milking a cow, painting", 
+"a maid on a stool milking a cow, painting", 
+"smiling performers bow on stage following a performance, news photograph", 
+"a smiling cast bows deeply on stage, news photograph", 
+"a performer bows, stock photograph", 
+"a performer bowing, stock photograph", 
+"a magician bows deeply to the audience, theatre photograph", 
+"japanese businessmen bow to one another, photograph", 
+"A man exercises at a local gym. Gym equipment is visible around him.", 
+"Wide shot of a skiier on snowy slopes", 
+"Wide shot of a surfer on an ocean wave", 
+"Closeup of a pair of scissors cutting paper, studio lighting", 
+"Scissors cutting a sheet of paper, studio lighting", 
+"A hand cuts paper with scissors, stock photography", 
+"Cutting paper with scissors, stock photography", 
+"Cutting paper with a pair of scissors, stock photography", 
+"The knighting ceremony", 
+"The knighting ceremony, man being knighted by the king, rennaisance painting", 
+"A kneeling man is knighted by the king, rennaisance painting", 
+"A kneeling man is knighted by the king's sword, rennaisance painting", 
+"The king knights a man with his sword, renaissance painting", 
+"The knighting of sir lancelot, renaissance painting", 
+"closeup of a sleeping child, smiling slightly, stock photograph", 
+"mid shot of a child sleeping on a pillow, smiling slightly, stock photograph", 
+"mid shot of a child sleeping on a pillow, stock photograph", 
+"mid shot of a woman floating peacefully in a pool, stock photograph", 
+"wide shot of a woman floating peacefully in a pool, stock photograph", 
+"wide shot of a woman floating peacefully on the surface of water, stock photograph", 
+"wide shot of a woman floating peacefully in the sea, stock photograph", 
+"a boy reading a book, studio lighting", 
+"a mountain climber in the alps, national geographic", 
+"closeup of a log being sawn, sawdust flying, fast shutter speed", 
+"closeup of a saw cutting timber, fast shutter speed", 
+"closeup of a handsaw cutting timber", 
+"closeup of a carpenter using a handsaw on timber", 
+"closeup of a carpenter using a handsaw on timber, studio lighting", 
+"closeup of a carpenter sawing timber, studio lighting", 
+"a yacht sailing on the sea, daylight, long shot", 
+"rowing a rowboat across a pond with oars, wide shot", 
+"a swimmer dives into the pool, sports photograph, high speed shutter", 
+"an olympic diver enters the water, sports photograph, high speed shutter", 
+"a diver enters the water with a splash, news photograph", 
+"a springboard diver enters the water with a splash, news photograph, indoor pool", 
+"A 10m platform diver enters the water with a splash, wide shot, news photograph", 
+"A diver enters the water with a splash, wide shot, Olympic Games", 
+"A cowboy whirls a lasso rope, stock photograph", 
+"A cowboy spins a lasso, stock photograph", 
+"A cowboy spins a lasso, wide shot, stock photograph", 
+"Closeup of a hand pointing, studio lighting", 
+"Closeup of a jug pouring into a glass, studio lighting", 
+"A person kneeling, white studio backdrop", 
+"A person kneeling on a yoga mat, studio lighting", 
+"Hands typing on a computer keyboard, motion blur", 
+"Closeup of a clothes iron ironing clothes, studio lighting", 
+"Closeup of a hand ironing clothes, stock photography", 
+"A man sweeping the floor, stock photography", 
+"A man sweeping the floor, studio lighting", 
+"Sweeping the floor with a broom, studio lighting", 
+"A woman brushing her long hair with a hairbrush, studio lighting, stock photography", 
+"A woman brushing her hair with a hairbrush, studio lighting, stock photography", 
+"closeup of a hairbrush brushing hair, studio lighting, stock photography", 
+"closeup of a hair with a hairbrush in it, studio lighting, stock photography", 
+"Closeup of a woman brushing her hair with a hairbrush, studio lighting, stock photography", 
+"a child crying, stock photograph", 
+"A man shovelling rocks, outdoor lighting", 
+"A man shovelling soil, outdoor lighting", 
+"A fencing match, sports photography", 
+"wide shot of a fencing match, sports photography", 
+"Erupting volcano, distance photograph, national geographic", 
+"stock photograph of a microscope, studio lighting", 
+"woven rope on a white background, studio lighting", 
+"a white candle burning, black background", 
+"A large waterfall spills over rocks into a river, daylight, national geographic", 
+"Portrait of a regal king wearing a crown", 
+"Portrait of a regal king wearing a crown, renaissance painting", 
+"Portrait of a king wearing a golden crown, head and shoulders, renaissance painting", 
+"A black hat on a white background, studio lighting", 
+"A golden, jewel-encrusted crown on a white background, studio lighting", 
+"A kite flying against a blue sky, outdoor lighting", 
+"A ballpoint pen lying on a desk, stock photograph", 
+"Midshot of a ballpoint pen lying on a desk, stock photograph", 
+"Overhead view of a ballpoint pen lying on a desk, stock photograph", 
+"Overhead view of a scissors on a desk, stock photograph", 
+"Overhead view of a dry bone, stock photograph", 
+"A fireman holding a firehose, news photograph", 
+"A fireman holding a firehose, studio lighting, stock photograph", 
+"A man in fireman's uniform and hat, studio lighting, stock photograph", 
+"Full shot of a man in fireman's uniform and hat, studio lighting, stock photograph", 
+"Head and shoulders midshot of a man in fireman's uniform and hat, studio lighting, stock photograph", 
+"An empty glass on a white background, studio lighting", 
+"An old leather boot, studio lighting", 
+"Closeup of a standard dice, black background, 4800K", 
+"Wide shot of a grand piano, dark background", 
+"Stock photograph of a piano, dark background", 
+"Wide shot of a piano, studio lighting", 
+"An open closet door, with clothing hung inside it. Interior photograph.", 
+"A single doored closet with clothing hung inside it. Interior photograph.", 
+"A closet with clothing hung inside it. Interior photograph.", 
+"A duck, outdoor photograph, daylight", 
+"A single car garage, outdoor photograph", 
+"Wide shot of a house, outdoor lighting", 
+"A human skull, dark background, studio lighting", 
+"Photograph of a cow in a field, outdoor lighting", 
+"Photograph of a Friesian cow in a field, outdoor lighting", 
+"A ripe pear, stock photograph, warm studio lighting", 
+"A wooden walking cane, studio lighting", 
+"A curved walking cane, studio lighting", 
+"A cat, photograph", 
+"A metal fork, studio lighting", 
+"A white van parked on a street, outdoor lighting", 
+"A red apple, studio lighting", 
+"Artist's depiction of a brachiosaurus", 
+"Artist's depiction of a tyrannosaurus rex", 
+"Closeup of a woman's long hair, high gloss, studio lighting", 
+"A wig placed on a mannequin head, studio lighting", 
+"A wig placed on a faceless mannequin head, studio lighting", 
+"A desk lamp, stock photograph", 
+"Binoculars, stock photograph", 
+"Closeup of a hand, white studio background", 
+"A kitchen knife, studio lighting", 
+"Mid shot of a kitchen knife lying on a benchtop", 
+"An NFL football, studio lighting", 
+"Closeup of a zipper", 
+"A jacket with a zipper", 
+"Mid shot of a tractor on a farm, midday lighting", 
+"Wide shot of a tractor on a farm, midday lighting", 
+"A foot standing on a white background, stock photograph", 
+"Adult foot standing on a white background, stock photograph", 
+"A tent in a forest clearing, outdoor photograph", 
+"A butcher in an apron, chasing a nurse in uniform down the street, action photograph", 
+"A butcher in an apron, chasing a woman in nurse's uniform down the street, action photograph", 
+"A butcher in an apron, chasing a woman in nurse's uniform, action photograph", 
+"A butcher in an apron, chasing a woman in nurse's uniform, high shutter speed photograph", 
+"A butcher chasing a nurse, high shutter speed photograph", 
+"A butcher chasing a uniformed nurse, high shutter speed photograph", 
+"A man holding a microphone photographs a soldier", 
+"A singing man photographs a soldier", 
+"An entertainer photographs a soldier", 
+"An entertainer in costume takes a photograph of a soldier", 
+"A singing man photographs a soldier at attention", 
+"A singing man takes a photo of a soldier at attention", 
+"Closeup of a woman biting an apple, stock photography", 
+"Closeup of a boy crying, bright studio lighting, stock photography", 
+"Closeup of a boy with tears on his face, bright studio lighting, stock photography", 
+"Closeup of a crying boy with tears, bright studio lighting, stock photography", 
+"Closeup of a boy with tears on his face, bright studio lighting, stock photography",
+"Closeup of a crying boy, bright studio lighting, stock photography", 
+"Closeup of a crying boy", 
+"A man sitting comfortably in an armchair", 
+"A man sitting on a chair, stock photograph", 
+"A smiling man sitting on a chair, stock photograph", 
+"Wide shot of a smiling man sitting on a chair, stock photograph", 
+"A blue flower inside a coffe mug, studio lighting", 
+"A blue flower inside a coffe mug, bright studio lighting", 
+"A cyan flower inside a coffee mug, bright studio lighting", 
+"A woman drinking a glass of juice, bright studio lighting", 
+"Closeup of a woman drinking a glass of juice, bright studio lighting", 
+"Closeup of a woman drinking from a glass, stock photograph", 
+"Closeup of an ice-cream being eaten by a woman, stock photograph", 
+"Wide shot of a dog sitting on top of a wooden table", 
+"Wide shot of a dog sitting beneath a table", 
+"Wide shot of a dog sitting under a table", 
+"A ballerina chasing a policeman, high speed shutter", 
+"A ballerina runs behind a policeman, high speed shutter", 
+"An angry ballerina runs behind a smiling policeman, high speed shutter", 
+"An ballerina runs after a policeman, high speed shutter", 
+"A ballerina runs after a policeman, stock photograph", 
+"A ballerina runs behind a policeman, stock photograph", 
+"A mug sits on a green flower", 
+"A mug sits on a green gerbera", 
+"A mug sits on a green gerbera, airbrush", 
+"A mug sits on the stem of a green gerbera, airbrush", 
+"A green gerbera under a mug, digital art", 
+"A green gerbera squashed beneath a mug, digital art", 
+"Wide shot of a man standing, white studio background", 
+"A shoe standing on a green pencil", 
+"A shoe stepping on a green pencil", 
+"A brown shoe stepping on a green pencil", 
+"a policeman running after a ballerina, high speed shutter", 
+"a policeman running behind a ballerina, high speed shutter", 
+"a ballerina running away from a policeman, high speed shutter", 
+"a policeman chases a ballerina", 
+"a policeman runs behind a ballerina", 
+"A man walks down the street, daylight, wide shot", 
+"A woman walks down the street, daylight, wide shot", 
+"A woman walks, daylight, wide shot", 
+"A woman walks, stock photograph", 
+"Closeup of an ice-cream being eaten by a man, stock photograph", 
+"Closeup of a girl crying, bright studio lighting, stock photography", 
+"A girl crying, bright studio lighting, stock photography, head and shoulders shot", 
+"A cat lies on a red carpet, indoor lighting", 
+"Mid shot of a cat lying on a red carpet, indoor lighting", 
+"Closeup of a man eating an apple, stock photograph", 
+"Closeup of a man eating an apple, stock photograph, high detail", 
+"a man eating an apple, stock photograph, high detail", 
+"a man biting an apple, stock photograph", 
+"A notepad on a desk, with a pen half hidden underneath it", 
+"A pen underneath a ream of paper", 
+"A piece of paper laid over a pen", 
+"Paper on a desk. A pen is half hidden beneath the paper.", 
+"Paper on a desk. Half of a pen is visible beneath the paper.", 
+"Paper laid over a pen.", 
+"A flower inside a blue mug, studio lighting", 
+"Full body shot of a woman standing, white studio background.", 
+"A smiling boy sits on a table, stock photograph", 
+"A smiling boy sits on top of a table, stock photograph, wide shot", 
+"A smiling boy sits on top of a table, stock photograph, wide shot, shot from behind", 
+"A boy sits on top of a table, stock photograph, wide shot, shot from behind", 
+"A smiling boy sits on top of a table, stock photograph, wide shot", 
+"A boy sits on top of a table, stock photograph, shot from the side", 
+"A singer hits a soldier with a microphone", 
+"A solider standing to attention. A man taps his shoulder with a microphone.", 
+"A singer taps a soldier with his microphone", 
+"A singer taps a soldier with his microphone, photograph", 
+"A singer hits a soldier with his microphone", 
+"A singer knocks a soldier with his microphone", 
+"A ballerina poses while a policeman paints her portrait", 
+"A ballerina poses while a policeman paints her portrait on a canvas in oils, stock photograph", 
+"A policeman paints a ballerina on a canvas, stock photograph", 
+"A man paints a picture on a canvas, stock photograph", 
+"A blue gerbera squashed beneath a mug, digital art", 
+"A mug sits on top of a blue gerbera", 
+"A mug resting on top of a blue gerbera", 
+"A white mug resting on top of a blue gerbera", 
+"A white mug sits on top of a blue flower", 
+"A white mug sits on top of a blue gerbera, airbrush artwork", 
+"A soldier taking a photograph of a singer on stage", 
+"A soldier takes a photograph of a singer in concert", 
+"A soldier photographs a singer, news photograph", 
+"A soldier photographs a singer at a concert, news photograph", 
+"A soldier photographs a singer, clipart", 
+"A soldier photographs a singer, comic book art", 
+"A leather shoe on top of an apple, stock photography", 
+"A leather shoe standing on an apple, stock photography", 
+"An apple underneath a leather shoe, stock photography", 
+"Closeup of a shoe standing on top of an apple, stock photograph", 
+"Closeup of a shoed foot standing on an apple, stock photograph", 
+"Closeup of a shoe squashing an apple, stock photograph", 
+"Closeup of a shoe standing on a blue pencil, stock photograph", 
+"Closeup of a shoe stepping on a blue pencil, stock photograph", 
+"Closeup of a leather shoe stepping on a blue pencil, stock photograph", 
+"Wide shot of a leather shoe stepping on a blue pencil, stock photograph", 
+"Wide shot of a leather shoe resting on a blue pencil, stock photograph", 
+"Wide shot of a leather shoe resting on a blue pencil, digital art", 
+"A pencil on a blue shoe, stock photography", 
+"A woman sitting in a chair, white studio background, profile shot", 
+"A ballerina paints a policeman on canvas, stock photograph", 
+"A ballerina painting a policeman on canvas, stock photograph", 
+"A ballerina painting a portrait of a policeman, stock photograph", 
+"A ballerina painting a portrait of a policeman", 
+"A ballerina painting a policeman", 
+"A ballerina painting a policeman", 
+"A red pencil sits on a leather shoe, studio lighting", 
+"A pen sits on a ream of paper, afternoon lighting", 
+"A pen sits on a stack of paper, afternoon lighting", 
+"A pen sits on a thick notepad, studio lighting", 
+"A woman paints a picture on a canvas, stock photograph", 
+"A man laughing happily, stock photograph", 
+"A painter paints a wall with a roller, bright indoor lighting", 
+"A painter paints a wall with a roller, bright indoor lighting, hight detail" ]
+
+    </script>
+    
+
+
+</body></html>
